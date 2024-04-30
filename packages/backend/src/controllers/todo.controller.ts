@@ -5,9 +5,13 @@ export class TodoController {
 	constructor(private todoService: TodoService) {}
 
 	async getAllTodo(_: Request, res: Response): Promise<void> {
-		// TODO: Write your implementation here
-		const todos = await this.todoService.findAll();
-		res.send(todos);
+		try {
+			const todos = await this.todoService.findAll();
+			res.json(todos);
+		} catch (error) {
+			console.error('Error fetching todos:', error);
+			res.status(500).json({ error: 'Internal server error' });
+		}
 	}
 }
 
