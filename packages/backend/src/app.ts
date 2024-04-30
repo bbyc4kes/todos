@@ -12,11 +12,11 @@ const router = new AppRouter(app);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use('/todos', todosRouter);
+
 app.get('/', (req: Request, res: Response) => {
 	res.send('Hello Node!');
 });
-
-app.use('/todos', todosRouter);
 
 router.init();
 

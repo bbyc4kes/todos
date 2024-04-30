@@ -4,6 +4,7 @@ const prisma = new PrismaClient();
 
 export default class TodoService {
 	async findAll(): Promise<Todo[]> {
-		return prisma.todo.findMany();
+		const todos = await prisma.todo.findMany();
+		return todos;
 	}
 }
