@@ -1,23 +1,14 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 
-import Button from '~shared/components/button/button.component';
+import { fetchAllTodos, fetchTodoById } from '~shared/services/todos/http';
 
 const App = (): React.ReactNode => {
-	const [count, setCount] = React.useState(0);
+	useEffect(() => {
+		fetchAllTodos();
+		fetchTodoById(2);
+	}, []);
 
-	const onIncrease = (): void => {
-		setCount((prev) => {
-			return prev + 1;
-		});
-	};
-
-	return (
-		<>
-			<h1>Todo project</h1>
-			<p>{count}</p>
-			<Button text="Increase" onClick={onIncrease} />
-		</>
-	);
+	return <></>;
 };
 
 export default App;

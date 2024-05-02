@@ -42,6 +42,12 @@
 			],
 			"~/*": [
 				"src/*"
+			],
+			"~components/*": [
+				"src/components/*"
+			],
+			"~hooks/*": [
+				"src/shared/hooks/*"
 			]
 		}
 	},
