@@ -1,12 +1,11 @@
+import userController from '@/controllers/user.controller';
 import { Router, Request, Response } from 'express';
 
-const router: Router = Router();
+const userRouter: Router = Router();
 
-// @route   POST api/user
-// @desc    Register user given their email and password, returns the token upon successful registration
-// @access  Public
-router.post('/register', async (_: Request, res: Response) => {
+userRouter.post('/register', async (_: Request, res: Response) => {
 	res.send('Add registration logic there');
 });
+userRouter.post('/newUser', userController.createNewUser.bind(userController));
 
-export default router;
+export default userRouter;
