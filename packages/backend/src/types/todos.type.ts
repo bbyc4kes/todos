@@ -11,7 +11,7 @@ export type TodoType = {
 	createdAt?: Date | null;
 };
 
-export type ExpressFuncitonType = (
+export type ExpressFunctionType = (
 	req: Request,
 	res: Response,
 ) => Promise<Response>;
