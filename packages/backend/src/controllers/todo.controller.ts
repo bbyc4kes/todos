@@ -57,10 +57,10 @@ class TodoController {
 
 	updatePrivacy: ExpressFunctionType = async (req, res) => {
 		const { id } = req.params;
-		const { isPrivate } = req.query;
+		const { isPublic } = req.query;
 
 		const parsedId = parseFloat(id);
-		const todoIsPrivate = isPrivate === 'true';
+		const todoIsPrivate = isPublic === 'false';
 
 		const updatedTodo = await todoService.updateIsPublic(
 			parsedId,
