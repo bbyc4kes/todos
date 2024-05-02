@@ -15,22 +15,22 @@ todosRouter
 
 todosRouter
 	.route('/:id')
-	.get(doesExist('findById'), catchAsync(todoController.getTodoById))
+	.get(doesExist('todo'), catchAsync(todoController.getTodoById))
 	.put(
-		doesExist('update'),
+		doesExist('todo'),
 		validateBody(todoSchema),
 		catchAsync(todoController.updateTodo),
 	)
 	.patch(
-		doesExist('updateIsComplete'),
+		doesExist('todo'),
 		validateBody(todoSchema),
 		catchAsync(todoController.updateCompleteness),
 	)
-	.delete(doesExist('destroy'), catchAsync(todoController.destroyTodo));
+	.delete(doesExist('todo'), catchAsync(todoController.destroyTodo));
 
 todosRouter.patch(
 	'/:id/privacy',
-	doesExist('updateIsPublic'),
+	doesExist('todo'),
 	validateBody(todoSchema),
 	catchAsync(todoController.updatePrivacy),
 );

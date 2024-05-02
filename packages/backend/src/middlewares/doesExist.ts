@@ -1,7 +1,11 @@
 import todoService from '@/services/todo.service';
 import { NextFunction, Request, Response } from 'express';
 
-type Services = typeof todoService;
+const services = {
+	todo: todoService,
+};
+
+type Services = typeof services;
 
 const doesExist =
 	(serviceName: keyof Services) =>
@@ -14,12 +18,19 @@ const doesExist =
 
 		const parsedId = parseFloat(id);
 		try {
-			const service = todoService;
-			if (service[serviceName]) {
+			const service = services[serviceName];
+			if (!service) {
 				return res
 					.status(500)
 					.json({ message: `${serviceName} service was not found` });
 			}
+
+			if (isNaN(parsedId)) {
+				return res
+					.status(400)
+					.json({ message: 'Entered ID is not valid.' });
+			}
+
 			const todo = await service.findById(parsedId);
 			if (!todo) {
 				return res
