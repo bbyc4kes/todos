@@ -1,22 +1,20 @@
-import * as React from 'react';
-import {
-	createBrowserRouter,
-	createRoutesFromElements,
-	Route,
-	RouterProvider,
-} from 'react-router-dom';
-import App from '~modules/app/app.module';
-
-const router = createBrowserRouter(
-	createRoutesFromElements(
-		<Route path="/" element={<App />}>
-			<Route path="test" element={<h1>testing</h1>}></Route>
-		</Route>,
-	),
-);
+import React from 'react';
+import App from '../modules/app/app.module';
+import { Route, Routes } from 'react-router-dom';
+import TodoDetailsPage from '~modules/todos/containers/todo-details.container';
+import NotFound from '~modules/not-found/components/not-found.component';
 
 const Router: React.FunctionComponent = () => {
-	return <RouterProvider router={router} />;
+	return (
+		<Routes>
+			<Route path="/">
+				<Route index element={<App />} />
+				<Route path="api/todos/:id" element={<TodoDetailsPage />} />
+			</Route>
+
+			<Route path="*" element={<NotFound />} />
+		</Routes>
+	);
 };
 
 export default Router;

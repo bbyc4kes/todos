@@ -1,14 +1,12 @@
-import React, { useEffect } from 'react';
-
-import { fetchAllTodos, fetchTodoById } from '~shared/services/todos/http';
+import React from 'react';
+import TodoListPage from '~modules/todos/containers/todo-list.container';
 
 const App = (): React.ReactNode => {
-	useEffect(() => {
-		fetchAllTodos();
-		fetchTodoById(2);
-	}, []);
-
-	return <></>;
+	return (
+		<>
+			<TodoListPage />
+		</>
+	);
 };
 
 export default App;
