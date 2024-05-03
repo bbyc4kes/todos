@@ -44,6 +44,12 @@ class TodoController {
 		const { id } = req.params;
 		const { isCompleted } = req.query;
 
+		if (typeof isCompleted !== 'string') {
+			return res
+				.status(400)
+				.json({ error: 'isCompleted must be a string' });
+		}
+
 		const parsedId = parseFloat(id);
 		const todoIsCompleted = isCompleted === 'true';
 
@@ -60,11 +66,11 @@ class TodoController {
 		const { isPublic } = req.query;
 
 		const parsedId = parseFloat(id);
-		const todoIsPrivate = isPublic === 'false';
+		const todoIsPublic = isPublic === 'true';
 
 		const updatedTodo = await todoService.updateIsPublic(
 			parsedId,
-			todoIsPrivate,
+			todoIsPublic,
 		);
 
 		return res.json(updatedTodo);
