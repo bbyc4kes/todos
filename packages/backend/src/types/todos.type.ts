@@ -6,7 +6,7 @@ export type TodoType = {
 	description: string;
 	isCompleted: boolean;
 	isPublic: boolean;
-	userId: number;
+	userId?: number | null;
 	updatedAt?: Date | null;
 	createdAt?: Date | null;
 };
