@@ -49,7 +49,7 @@ const updateIsComplete = async (
 	id: number,
 	isCompleted: boolean,
 ): Promise<TodoType | null> => {
-	const updateIsComplete: TodoType | null = await prisma.todo.update({
+	const updatedTodoIsComplete: TodoType | null = await prisma.todo.update({
 		where: {
 			id,
 		},
@@ -57,14 +57,14 @@ const updateIsComplete = async (
 			isCompleted,
 		},
 	});
-	return updateIsComplete;
+	return updatedTodoIsComplete;
 };
 
 const updateIsPublic = async (
 	id: number,
 	isPublic: boolean,
 ): Promise<TodoType | null> => {
-	const updateIsPublic: TodoType | null = await prisma.todo.update({
+	const updatedTodoIsPublic: TodoType | null = await prisma.todo.update({
 		where: {
 			id,
 		},
@@ -72,7 +72,7 @@ const updateIsPublic = async (
 			isPublic,
 		},
 	});
-	return updateIsPublic;
+	return updatedTodoIsPublic;
 };
 
 export default {
