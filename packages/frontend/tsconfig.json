@@ -22,9 +22,6 @@
 			"vite/client"
 		],
 		"paths": {
-			"~assets/*": [
-				"src/assets/*"
-			],
 			"~modules/*": [
 				"src/modules/*"
 			],
@@ -40,6 +37,21 @@
 			"~typings/*": [
 				"src/typings/*"
 			],
+			"~pages/*": [
+				"src/pages/*"
+			],
+			"~dashboard/*": [
+				"src/pages/dashboard/*"
+			],
+			"~todo/*": [
+				"src/pages/todo/*"
+			],
+			"~todo-list/*": [
+				"src/pages/todo-list/*"
+			],
+			"~not-found/*": [
+				"src/modules/not-found/*"
+			],
 			"~/*": [
 				"src/*"
 			],
@@ -48,6 +60,9 @@
 			],
 			"~hooks/*": [
 				"src/shared/hooks/*"
+			],
+			"~assets/*": [
+				"src/assets/*"
 			]
 		}
 	},
