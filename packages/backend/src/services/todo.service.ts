@@ -1,5 +1,5 @@
 import { TodoType } from '@/types/todos.type';
-import { PrismaClient } from '@prisma/client';
+import { Prisma, PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -17,7 +17,9 @@ const findById = async (id: number): Promise<TodoType | null> => {
 	return todoById;
 };
 
-export const create = async (data: TodoType): Promise<TodoType> => {
+export const create = async (
+	data: Prisma.TodoCreateInput,
+): Promise<TodoType> => {
 	const newTodo = await prisma.todo.create({
 		data,
 	});
