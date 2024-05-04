@@ -1,79 +1,86 @@
-import { Button } from '@blueprintjs/core';
 import React from 'react';
 import { Field } from 'react-final-form';
+import CustomButton from '~shared/components/button/button.component';
+import {
+	inputContainerStyles,
+	checkboxContainerStyles,
+	todoFormContainerStyles,
+} from './todo-form.styles';
 
-const AddTodoForm = ({ handleSubmit }): React.ReactNode => (
-	<form
-		onSubmit={handleSubmit}
-		style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
-	>
-		<div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-			<label>
-				<b>Title</b>
-			</label>
-			<Field
-				name="title"
-				component="input"
-				type="text"
-				placeholder="Title"
-			/>
-		</div>
-		<div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-			<label>
-				<b>Description</b>
-			</label>
-			<Field
-				name="description"
-				component="input"
-				type="text"
-				placeholder="Description"
-			/>
-		</div>
-		<div>
-			<label>
+const AddTodoForm = ({ handleSubmit, type }): React.ReactNode => {
+	const submitBtnText = type === 'edit' ? 'Edit' : 'Create';
+	return (
+		<form onSubmit={handleSubmit} className={todoFormContainerStyles}>
+			<div className={inputContainerStyles}>
+				<label>
+					<b>Title</b>
+				</label>
 				<Field
-					name="isPublic"
+					name="title"
 					component="input"
-					type="radio"
-					value="true"
+					type="text"
+					placeholder="Title"
 				/>
-				Private
-			</label>
-			<label>
+			</div>
+			<div className={inputContainerStyles}>
+				<label>
+					<b>Description</b>
+				</label>
 				<Field
-					name="isPublic"
+					name="description"
 					component="input"
-					type="radio"
-					value="false"
+					type="text"
+					placeholder="Description"
 				/>
-				Public
-			</label>
-		</div>
-		<div>
-			<p>
-				<b>Is the task completed?</b>
-			</p>
-			<label>
-				<Field
-					name="isCompleted"
-					component="input"
-					type="radio"
-					value="true"
-				/>
-				Yes
-			</label>
-			<label>
-				<Field
-					name="isCompleted"
-					component="input"
-					type="radio"
-					value="false"
-				/>
-				No
-			</label>
-		</div>
-		<Button type="submit">Add Todo</Button>
-	</form>
-);
+			</div>
+			<div className={checkboxContainerStyles}>
+				<label>
+					<Field
+						name="isPublic"
+						component="input"
+						type="radio"
+						value="true"
+					/>
+					Public
+				</label>
+				<label>
+					<Field
+						name="isPublic"
+						component="input"
+						type="radio"
+						value="false"
+					/>
+					Private
+				</label>
+			</div>
+			<div>
+				<p>
+					<b>Is the task completed?</b>
+				</p>
+				<div className={checkboxContainerStyles}>
+					<label>
+						<Field
+							name="isCompleted"
+							component="input"
+							type="radio"
+							value="true"
+						/>
+						Yes
+					</label>
+					<label>
+						<Field
+							name="isCompleted"
+							component="input"
+							type="radio"
+							value="false"
+						/>
+						No
+					</label>
+				</div>
+			</div>
+			<CustomButton type="submit" text={submitBtnText} />
+		</form>
+	);
+};
 
 export default AddTodoForm;

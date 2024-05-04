@@ -1,14 +1,9 @@
 import { useState } from 'react';
-
-interface UseModal {
-	isOpen: boolean;
-	openModal: () => void;
-	closeModal: () => void;
-}
+import { IModalState, IUseModal } from './use-modal.types';
 
 export const useModal = (
-	initialState: { isOpen: boolean } = { isOpen: false },
-): UseModal => {
+	initialState: IModalState = { isOpen: false },
+): IUseModal => {
 	const [isOpen, setIsOpen] = useState<boolean>(initialState.isOpen);
 
 	const openModal = (): void => {
@@ -19,5 +14,5 @@ export const useModal = (
 		setIsOpen(false);
 	};
 
-	return { isOpen, openModal, closeModal };
+	return { isOpen, closeModal, openModal };
 };

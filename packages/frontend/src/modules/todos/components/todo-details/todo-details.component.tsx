@@ -1,15 +1,21 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { css } from '@emotion/css'; // Import css from Emotion
 import todoService from '~modules/todos/services/http';
 import { TTodoDetails } from './todo-details.types';
 import {
 	buttonStyles,
+	deleteButtonStyles,
 	descriptionStyles,
 	listItemStyles,
 	titleStyles,
+	detailsContainerStyles,
+	buttonsContainerStyles,
+	completenessContainer,
 } from './todo-details.styles';
-import { Button } from '@blueprintjs/core';
+import CustomButton from '~shared/components/button/button.component';
+import { ROUTER_KEYS } from '~shared/keys';
+import { truncateText } from '~shared/utils/truncate-text';
+import { Switch } from '@blueprintjs/core';
 
 const TodoDetails = ({
 	id,
@@ -22,7 +28,7 @@ const TodoDetails = ({
 	const navigate = useNavigate();
 
 	const handleGetTodoById = (id: number): void => {
-		navigate(`api/todos/${id}`);
+		navigate(`${ROUTER_KEYS.TODO_LIST}/${id}`);
 	};
 
 	const toggleCompleteness = async (id: number): Promise<void> => {
@@ -38,36 +44,41 @@ const TodoDetails = ({
 
 	return (
 		<div className={listItemStyles}>
-			<h2 className={titleStyles}>{title}</h2>
-			<h3 className={descriptionStyles}>{description}</h3>
-			<p>{isPublic ? 'true' : 'false'}</p>
-			<p>{todoCompleteness ? 'true' : 'false'}</p>
-			<div style={{ display: 'flex', marginTop: '16px' }}>
-				<button
-					className={css`
-						${buttonStyles}
-					`}
-					onClick={() => toggleCompleteness(id)}
-				>
-					Toggle Completeness
-				</button>
-				<Button
-					className={css`
-						${buttonStyles}
-					`}
+			<section className={detailsContainerStyles}>
+				<h2 className={titleStyles}>
+					Title:
+					<br /> {title}
+				</h2>
+				<h3 className={descriptionStyles}>
+					Description:
+					<br /> {truncateText(description, 10)}
+				</h3>
+				<p>Publicity: {isPublic ? 'public' : 'private'}</p>
+				<div className={completenessContainer}>
+					<p style={{ marginRight: '10px' }}>
+						Completed: {todoCompleteness ? 'yes' : 'no'}
+					</p>
+					<Switch
+						onClick={() => toggleCompleteness(id)}
+						large={true}
+						defaultChecked={todoCompleteness}
+					/>
+				</div>
+			</section>
+			<section className={buttonsContainerStyles}>
+				<CustomButton
+					extraButtonStyles={buttonStyles}
 					onClick={() => handleGetTodoById(id)}
-				>
-					View todo
-				</Button>
-				<Button
-					className={css`
-						${buttonStyles}
-					`}
+					text="View Todo"
+					type="button"
+				/>
+
+				<CustomButton
+					extraButtonStyles={deleteButtonStyles}
 					onClick={() => handleDeleteTodo(id)}
-				>
-					Delete todo
-				</Button>
-			</div>
+					text="Delete Todo"
+				/>
+			</section>
 		</div>
 	);
 };

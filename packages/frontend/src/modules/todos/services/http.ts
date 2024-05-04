@@ -23,7 +23,7 @@ class TodoService extends HttpService {
 			true,
 		);
 
-		useTodoStore.getState().addTodo(data.id);
+		useTodoStore.getState().getTodoById(data.id);
 	}
 
 	async createTodo(todo: Todo): Promise<void> {
@@ -36,7 +36,7 @@ class TodoService extends HttpService {
 	}
 
 	async editTodo(id: number, todo: Todo): Promise<void> {
-		const { data }: AxiosResponse<Todo[]> = await this.put(
+		const { data }: AxiosResponse<Todo> = await this.put(
 			{
 				url: `todos/${id}`,
 				data: { ...todo },
@@ -44,10 +44,10 @@ class TodoService extends HttpService {
 			true,
 		);
 
-		useTodoStore.getState().setTodos(data);
+		useTodoStore.getState().updateTodo(data);
 	}
 
-	async editPrivacy(id: string, todo: { isPublic: boolean }): Promise<void> {
+	async editPrivacy(id: number, todo: { isPublic: boolean }): Promise<void> {
 		const { data }: AxiosResponse<Todo> = await this.patch(
 			{
 				url: `todos/${id}`,
