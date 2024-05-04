@@ -63,6 +63,12 @@
 			],
 			"~assets/*": [
 				"src/assets/*"
+			],
+			"~utils/*": [
+				"src/shared/utils/*"
+			],
+			"~layouts/*": [
+				"src/shared/layouts/*"
 			]
 		}
 	},

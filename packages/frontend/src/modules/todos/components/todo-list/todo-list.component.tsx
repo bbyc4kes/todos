@@ -6,13 +6,22 @@ import AddTodoForm from '../todo-form/todo-form.component';
 import TodoDetails from '../todo-details/todo-details.component';
 import {
 	containerStyles,
-	headingStyles,
 	listStyles,
-	formStyles,
+	contentContainer,
+	buttonFormStyles,
+	addNewTodoStyles,
+	newTodoTitleStyles,
+	todosContainerStyles,
+	addNewTodoContainerStyles,
 } from './todo-list.styles';
+import { Dialog } from '@blueprintjs/core';
+import { useModal } from '~shared/hooks/use-modal/use-modal.hook';
+import CustomButton from '~shared/components/button/button.component';
+import { CirclePlusIcon } from 'lucide-react';
 
 const TodoList = (): React.ReactNode => {
 	const todos = useTodoStore((state) => state.todos);
+	const { isOpen, openModal, closeModal } = useModal();
 
 	useEffect(() => {
 		todoService.getAllTodos();
@@ -29,23 +38,49 @@ const TodoList = (): React.ReactNode => {
 		};
 
 		await todoService.createTodo(todoData);
+		closeModal();
 	};
 
 	return (
 		<div className={containerStyles}>
-			<h2 className={headingStyles}>TODO LIST</h2>
-			<ul className={listStyles}>
-				{todos?.map((todo) => (
-					<li key={todo.id}>
-						<TodoDetails {...todo} />
-					</li>
-				))}
-			</ul>
-			<Form
-				onSubmit={onSubmit}
-				render={AddTodoForm}
-				className={formStyles}
-			/>
+			<div className={contentContainer}>
+				<section className={todosContainerStyles}>
+					<ul className={listStyles}>
+						{todos?.map((todo) => (
+							<li key={todo.id}>
+								<TodoDetails {...todo} />
+							</li>
+						))}
+					</ul>
+				</section>
+				<section className={addNewTodoContainerStyles}>
+					<div className={addNewTodoStyles}>
+						<h2 className={newTodoTitleStyles}>Add New Task!</h2>
+						<p>
+							Make your time management easier with our Todo app!
+						</p>
+						<CustomButton
+							text="Add"
+							onClick={openModal}
+							extraButtonStyles={buttonFormStyles}
+							icon={<CirclePlusIcon />}
+						/>
+					</div>
+				</section>
+				<Dialog
+					isOpen={isOpen}
+					onClose={closeModal}
+					isCloseButtonShown={true}
+					title="Create Your Todo"
+				>
+					<Form
+						onSubmit={onSubmit}
+						render={(props) => (
+							<AddTodoForm {...props} type="submit" />
+						)}
+					/>
+				</Dialog>
+			</div>
 		</div>
 	);
 };

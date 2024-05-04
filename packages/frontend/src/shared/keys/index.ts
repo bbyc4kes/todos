@@ -1,7 +1,8 @@
 export const enum ROUTER_KEYS {
-	ALL_MATCH = '/*',
+	ROOT = '/',
 	LOGIN = '/login',
-	DASHBOARD = '/dashboard',
+	NOT_FOUND = '*',
+	TODO_LIST = '/todos',
 }
 
 export const STORAGE_KEYS = Object.freeze({

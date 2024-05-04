@@ -4,11 +4,12 @@ import { TodoStore } from './todo.store.types';
 export const useTodoStore = create<TodoStore>((set) => ({
 	todos: [],
 	todoById: null,
+
 	setTodos: (todos): void => set({ todos: todos }),
 	getTodoById: (id: number): void => {
 		set((state) => {
-			const filteredTodo = state.todos.find((todo) => todo.id === id);
-			return { ...state, oneTodo: filteredTodo };
+			const oneTodo = state.todos.find((todo) => todo.id === id);
+			return { ...state, todoById: oneTodo };
 		});
 	},
 	addTodo: (newTodo): void =>
