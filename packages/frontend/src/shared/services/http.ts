@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosResponse } from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 class HttpService {
 	baseUrl: string;
@@ -12,10 +12,10 @@ class HttpService {
 	}
 
 	private extractUrlAndDataFromConfig({
-		// pass data,
-		// pass url,
+		_url,
+		_data,
 		...configWithoutDataAndUrl
-	}): object {
+	}): AxiosRequestConfig {
 		return configWithoutDataAndUrl;
 	}
 

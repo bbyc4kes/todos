@@ -1,11 +1,11 @@
 import React from 'react';
-import TodoListPage from '~modules/todos/containers/todo-list.container';
+import TodoMainPage from '~modules/todos/containers/todo-main-page/todo-main-page.container';
 import Layout from '~shared/layouts/layout';
 
 const App = (): React.ReactNode => {
 	return (
 		<Layout>
-			<TodoListPage />
+			<TodoMainPage />
 		</Layout>
 	);
 };
