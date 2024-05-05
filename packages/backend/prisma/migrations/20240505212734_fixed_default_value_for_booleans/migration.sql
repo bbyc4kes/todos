@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Todo" ALTER COLUMN "isCompleted" DROP DEFAULT,
+ALTER COLUMN "isPublic" DROP DEFAULT;
