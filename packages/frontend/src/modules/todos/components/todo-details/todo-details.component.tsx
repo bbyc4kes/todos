@@ -17,7 +17,6 @@ import { ROUTER_KEYS } from '~shared/keys';
 import { truncateText } from '~shared/utils/truncate-text';
 import DeleteButton from '../todo-delete-button/todo-delete-button.component';
 import TodoCheckbox from '../todo-switch/todo-switch.component';
-import useBreakpoints from '~shared/hooks/use-breakpoints/use-breakpoints';
 
 const TodoDetails = ({
 	id,
@@ -26,7 +25,6 @@ const TodoDetails = ({
 	isPublic,
 	isCompleted,
 }: TTodoDetails): React.ReactNode => {
-	const { isTablet, isMobile } = useBreakpoints();
 	const navigate = useNavigate();
 
 	const handleGetTodoById = (id: number): void => {
@@ -54,9 +52,7 @@ const TodoDetails = ({
 					</p>
 				</div>
 				<div className={completenessContainer}>
-					<h3 className={completedStyles}>
-						{isTablet || isMobile ? 'DONE' : 'COMPLETED'}:
-					</h3>
+					<h3 className={completedStyles}>COMPLETED:</h3>
 					<TodoCheckbox isCompleted={isCompleted} id={id} />
 				</div>
 			</section>
