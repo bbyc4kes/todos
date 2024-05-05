@@ -1,4 +1,5 @@
 import { css } from '@emotion/css';
+import { THEME } from '~shared/styles';
 
 export const mainContainerStyles = css`
 	display: flex;
@@ -19,9 +20,9 @@ export const paragraphContainerStyles = css`
 	display: flex;
 	position: relative;
 	align-items: center;
-	font-size: 20px;
-	margin-top: 18px;
-	margin-bottom: 18px;
+	font-size: ${THEME.sizes.s};
+	margin-top: ${THEME.sizes.xxxs};
+	margin-bottom: ${THEME.sizes.xxxs};
 `;
 
 export const headingContainerStyles = css`
@@ -31,7 +32,7 @@ export const headingContainerStyles = css`
 	justify-content: start;
 	align-items: center;
 	gap: 4px;
-	font-size: 26px;
+	font-size: ${THEME.sizes.l};
 `;
 
 export const contentContainerStyles = css`

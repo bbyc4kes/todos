@@ -1,5 +1,5 @@
 import { css } from '@emotion/css';
-import { colors } from '~shared/styles';
+import { THEME } from '~shared/styles';
 
 export const container = css`
 	display: flex;
@@ -14,29 +14,29 @@ export const iconStyles = css`
 `;
 
 export const buttonStyles = css`
-	margin: 8px;
+	margin: ${THEME.sizes.xxxs};
 	transition: all 0.3s ease-out;
 	&:hover {
-		background-color: ${colors.greyX};
+		background-color: ${THEME.colors.greyX};
 	}
 `;
 
 export const title = css`
-	font-size: 24px;
-	margin-bottom: 20px;
+	font-size: ${THEME.sizes.m};
+	margin-bottom: ${THEME.sizes.s};
 	color: #333;
 `;
 
 export const paragraghStyles = css`
-	font-size: 24px;
-	margin-bottom: 20px;
-	color: ${colors.greyX};
+	font-size: ${THEME.sizes.m};
+	margin-bottom: ${THEME.sizes.s};
+	color: ${THEME.colors.greyX};
 `;
 
 export const buttonContainer = css`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	font-size: 24px;
+	font-size: ${THEME.sizes.m};
 	color: #333;
 `;

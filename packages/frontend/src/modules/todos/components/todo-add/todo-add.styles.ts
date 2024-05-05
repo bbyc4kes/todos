@@ -1,5 +1,5 @@
 import { css } from '@emotion/css';
-import { colors } from '~shared/styles';
+import { THEME } from '~shared/styles';
 
 export const addNewTodoStyles: string = css`
 	display: flex;
@@ -13,7 +13,7 @@ export const newTodoTitleStyles: string = css`
 	text-transform: uppercase;
 	font-weight: 700;
 	letter-spacing: 1px;
-	font-size: 24px;
+	font-size: ${THEME.sizes.m};
 `;
 
 export const addNewTodoContainerStyles: string = css`
@@ -25,7 +25,7 @@ export const addNewTodoContainerStyles: string = css`
 `;
 
 export const buttonFormStyles: string = css`
-	color: ${colors.whiteX};
+	color: ${THEME.colors.whiteX};
 	cursor: pointer;
 	transition: all 0.3s ease;
 	border: solid;
@@ -39,8 +39,8 @@ export const buttonFormStyles: string = css`
 	border-width: 1px;
 
 	&:hover {
-		background-color: ${colors.philippineGray};
-		color: ${colors.brightGreyX};
+		background-color: ${THEME.colors.philippineGray};
+		color: ${THEME.colors.brightGreyX};
 		border-radius: 16px;
 	}
 `;

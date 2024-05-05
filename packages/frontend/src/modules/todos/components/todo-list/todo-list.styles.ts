@@ -1,19 +1,19 @@
 import { css } from '@emotion/css';
-import { colors } from '~shared/styles';
+import { THEME } from '~shared/styles';
 
 export const headingStyles = css`
-	font-size: 32px;
+	font-size: ${THEME.sizes.xl};
 	height: 72px;
 	font-weight: 700;
 	width: 100%;
-	background-color: ${colors.darkBlackX};
+	background-color: ${THEME.colors.darkBlackX};
 	text-align: center;
 	justify-content: center;
 	display: flex;
 	align-items: center;
 	margin-bottom: 25px;
-	color: ${colors.whiteX};
-	margin-bottom: 20px;
+	color: ${THEME.colors.whiteX};
+	margin-bottom: ${THEME.sizes.s};
 `;
 
 export const listStyles = css`
