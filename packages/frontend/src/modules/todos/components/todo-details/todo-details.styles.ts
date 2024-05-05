@@ -1,5 +1,5 @@
 import { css } from '@emotion/css';
-import { colors } from '~shared/styles';
+import { THEME } from '~shared/styles';
 
 export const listItemStyles: string = css`
 	display: flex;
@@ -16,7 +16,7 @@ export const listItemStyles: string = css`
 	gap: 2rem;
 	height: 230px;
 	border-width: 1px;
-	border-radius: 8px;
+	border-radius: ${THEME.sizes.xxxs};
 
 	@media (min-width: 645px) {
 		width: 400px;
@@ -26,15 +26,15 @@ export const listItemStyles: string = css`
 `;
 
 export const titleStyles: string = css`
-	font-size: 18px;
+	font-size: ${THEME.sizes.xs};
 	width: 150px;
-	margin-bottom: 8px;
+	margin-bottom: ${THEME.sizes.xxxs};
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 
 	@media (min-width: 645px) {
-		font-size: 20px;
+		font-size: ${THEME.sizes.s};
 	}
 `;
 
@@ -45,10 +45,10 @@ export const descriptionStyles: string = css`
 	display: -webkit-box;
 	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
-	margin-bottom: 8px;
+	margin-bottom: ${THEME.sizes.xxxs};
 
 	@media (min-width: 645px) {
-		font-size: 20px;
+		font-size: ${THEME.sizes.s};
 	}
 `;
 
@@ -58,7 +58,7 @@ export const completedStyles: string = css`
 	white-space: nowrap;
 
 	@media (min-width: 645px) {
-		font-size: 20px;
+		font-size: ${THEME.sizes.s};
 	}
 `;
 
@@ -69,15 +69,15 @@ export const textStyles: string = css`
 	display: -webkit-box;
 	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
-	margin-bottom: 8px;
+	margin-bottom: ${THEME.sizes.xxxs};
 
 	@media (min-width: 645px) {
-		font-size: 20px;
+		font-size: ${THEME.sizes.s};
 	}
 `;
 
 export const buttonStyles: string = css`
-	color: ${colors.whiteX};
+	color: ${THEME.colors.whiteX};
 	cursor: pointer;
 	margin: 2px;
 	transition: all 0.3s ease;
@@ -86,9 +86,9 @@ export const buttonStyles: string = css`
 	border-width: 1px;
 
 	&:hover {
-		background-color: ${colors.greyX};
-		color: ${colors.darkBlackX};
-		border-radius: 16px;
+		background-color: ${THEME.colors.greyX};
+		color: ${THEME.colors.darkBlackX};
+		border-radius: ${THEME.sizes.xs};
 	}
 `;
 
@@ -110,7 +110,7 @@ export const buttonsContainerStyles: string = css`
 
 	@media (min-width: 645px) {
 		width: 240px;
-		gap: 1rem;
+		gap: ${THEME.sizes.xs};
 		height: 240px;
 	}
 `;
@@ -119,5 +119,5 @@ export const completenessContainer: string = css`
 	display: flex;
 	align-items: center;
 	justify-content: start;
-	gap: 4px;
+	gap: ${THEME.sizes.xxxs};
 `;

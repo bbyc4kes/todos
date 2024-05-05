@@ -1,19 +1,19 @@
 import { css } from '@emotion/css';
-import { colors } from '~shared/styles';
+import { THEME } from '~shared/styles';
 
 export const buttonFormComponentStyle: string = css`
-	color: ${colors.whiteX};
+	color: ${THEME.colors.whiteX};
 	cursor: pointer;
-	margin: 8px;
+	margin: ${THEME.sizes.xxxs};
 	transition: all 0.3s ease;
 	text-align: center;
 	border: solid;
 	border-width: 1px;
 
 	&:hover {
-		background-color: ${colors.philippineGray};
-		color: ${colors.brightGreyX};
-		border-radius: 16px;
+		background-color: ${THEME.colors.philippineGray};
+		color: ${THEME.colors.brightGreyX};
+		border-radius: ${THEME.sizes.xs};
 	}
 `;
 

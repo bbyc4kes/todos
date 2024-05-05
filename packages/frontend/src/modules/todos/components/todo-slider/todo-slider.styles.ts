@@ -1,15 +1,12 @@
 import { css } from '@emotion/css';
+import { THEME } from '~shared/styles';
 
 export const sliderStyles = css`
 	text-align: center;
 	margin: 1rem;
-	width: 470px;
-
-	@media (min-width: 645px) {
-		width: 650px;
-	}
+	width: 100%;
 `;
 
 export const cardStyles = css`
-	margin: 8px;
+	margin: ${THEME.sizes.xxxs};
 `;

@@ -1,18 +1,18 @@
 import { css } from '@emotion/css';
-import { colors } from '../../styles';
+import { THEME } from '../../styles';
 
 export const btnStyles = (disabled: boolean): string => {
 	return css`
-		padding-right: 16px;
-		padding-left: 16px;
-		padding-top: 8px;
-		padding-bottom: 8px;
-		color: ${disabled ? colors.greyX : colors.white};
-		background-color: ${disabled ? colors.brightGreyX : colors.darkBlackX};
+		padding-right: ${THEME.sizes.xs};
+		padding-left: ${THEME.sizes.xs};
+		padding-top: ${THEME.sizes.xxxs};
+		padding-bottom: ${THEME.sizes.xxxs};
+		color: ${disabled ? THEME.colors.greyX : THEME.colors.white};
+		background-color: ${disabled ? THEME.colors.brightGreyX : THEME.colors.darkBlackX};
 		border: none;
-		border-color: ${disabled ? colors.greyX : colors.darkBlackX}
+		border-color: ${disabled ? THEME.colors.greyX : THEME.colors.darkBlackX}
 		border-width: 1px;
-		border-radius: 8px;
+		border-radius: ${THEME.sizes.xxxs};
 		text-align: center;
 		cursor: pointer;
 	`;
