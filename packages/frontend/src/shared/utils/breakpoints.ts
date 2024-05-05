@@ -11,15 +11,15 @@ interface IBreakpointsNumbers {
 }
 
 export const breakpoints: IBreakpoints = {
-	desktop: '768px',
-	tablet: '425px',
-	mobile: '320px',
+	desktop: '1024px',
+	tablet: '472px',
+	mobile: '472px',
 };
 
 export const breakpointsNumbers: IBreakpointsNumbers = {
-	desktop: 768,
-	tablet: 425,
-	mobile: 320,
+	desktop: 1024,
+	tablet: 472,
+	mobile: 472,
 };
 
 export const DEVICES = {

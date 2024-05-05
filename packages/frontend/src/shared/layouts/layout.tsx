@@ -4,7 +4,9 @@ import { headingStyles } from '~modules/todos/components/todo-list/todo-list.sty
 const Layout = ({ children }: { children: React.ReactNode }): JSX.Element => {
 	return (
 		<>
-			<h2 className={headingStyles}>TODOLIST</h2>
+			<a href="/" style={{ textDecoration: 'none' }}>
+				<h2 className={headingStyles}>TODOLIST</h2>
+			</a>
 			{children}
 		</>
 	);
