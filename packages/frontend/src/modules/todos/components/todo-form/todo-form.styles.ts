@@ -35,3 +35,11 @@ export const checkboxContainerStyles: string = css`
 	flex-direction: row;
 	gap: 1rem;
 `;
+
+export const labelContainerStyles: string = css`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+	gap: 4px;
+`;

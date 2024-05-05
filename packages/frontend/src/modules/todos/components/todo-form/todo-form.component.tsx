@@ -5,76 +5,79 @@ import {
 	inputContainerStyles,
 	checkboxContainerStyles,
 	todoFormContainerStyles,
+	labelContainerStyles,
 } from './todo-form.styles';
 
-const AddTodoForm = ({ handleSubmit, type }): React.ReactNode => {
+const AddTodoForm = ({ handleSubmit, type, todo = null }): React.ReactNode => {
 	const submitBtnText = type === 'edit' ? 'Edit' : 'Create';
 	return (
 		<form onSubmit={handleSubmit} className={todoFormContainerStyles}>
 			<div className={inputContainerStyles}>
 				<label>
-					<b>Title</b>
+					<b>TITLE</b>
 				</label>
 				<Field
 					name="title"
 					component="input"
 					type="text"
+					defaultValue={todo?.title}
 					placeholder="Title"
 				/>
 			</div>
 			<div className={inputContainerStyles}>
 				<label>
-					<b>Description</b>
+					<b>DESCRIPTION</b>
 				</label>
 				<Field
 					name="description"
 					component="input"
 					type="text"
+					defaultValue={todo?.description}
 					placeholder="Description"
 				/>
 			</div>
 			<div className={checkboxContainerStyles}>
-				<label>
+				<label className={labelContainerStyles}>
 					<Field
 						name="isPublic"
 						component="input"
 						type="radio"
 						value="true"
 					/>
-					Public
+					<p style={{ margin: 0 }}>PUBLIC</p>
 				</label>
-				<label>
+				<label className={labelContainerStyles}>
 					<Field
 						name="isPublic"
 						component="input"
 						type="radio"
 						value="false"
 					/>
-					Private
+					<p style={{ margin: 0 }}>PRIVATE</p>
 				</label>
 			</div>
 			<div>
 				<p>
-					<b>Is the task completed?</b>
+					<b>IS THE TASK COMPLETED?</b>
 				</p>
 				<div className={checkboxContainerStyles}>
-					<label>
+					<label className={labelContainerStyles}>
 						<Field
 							name="isCompleted"
 							component="input"
 							type="radio"
 							value="true"
 						/>
-						Yes
+						<p style={{ margin: 0 }}>YES</p>
 					</label>
-					<label>
+					<label className={labelContainerStyles}>
 						<Field
 							name="isCompleted"
 							component="input"
 							type="radio"
 							value="false"
 						/>
-						No
+						<p style={{ margin: 0 }}>NO</p>
 					</label>
 				</div>
 			</div>

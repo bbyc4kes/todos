@@ -5,23 +5,23 @@ export const useTodoStore = create<TodoStore>((set) => ({
 	todos: [],
 	todoById: null,
 
-	setTodos: (todos): void => set({ todos: todos }),
 	getTodoById: (id: number): void => {
 		set((state) => {
 			const oneTodo = state.todos.find((todo) => todo.id === id);
 			return { ...state, todoById: oneTodo };
 		});
 	},
+	setTodos: (todos): void => set({ todos: todos }),
 	addTodo: (newTodo): void =>
 		set((state) => ({ todos: [...state.todos, newTodo] })),
-	destroyTodo: (id: number): void =>
-		set((state) => ({
-			todos: state.todos.filter((todo) => todo.id !== id),
-		})),
 	updateTodo: (updatedTodo): void =>
 		set((state) => ({
 			todos: state.todos.map((todo) =>
 				todo.id === updatedTodo.id ? updatedTodo : todo,
 			),
+		})),
+	destroyTodo: (id: number): void =>
+		set((state) => ({
+			todos: state.todos.filter((todo) => todo.id !== id),
 		})),
 }));

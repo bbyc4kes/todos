@@ -2,32 +2,43 @@ import { css } from '@emotion/css';
 import { colors } from '~shared/styles';
 
 export const listItemStyles: string = css`
-	list-style: none;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	align-items: start;
 	text-align: start;
+	list-style: none;
 	border: solid;
 	padding: 2rem;
-	width: 500px;
+	padding-top: 1.5rem;
+	margin: 1rem;
+	width: 300px;
 	gap: 2rem;
-	height: 300px;
+	height: 230px;
 	border-width: 1px;
 	border-radius: 8px;
+
+	@media (min-width: 645px) {
+		width: 400px;
+		height: 260px;
+		align-items: center;
+	}
 `;
 
 export const titleStyles: string = css`
-	font-size: 24px;
+	font-size: 18px;
 	width: 150px;
 	margin-bottom: 8px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+
+	@media (min-width: 645px) {
+		font-size: 20px;
+	}
 `;
 
 export const descriptionStyles: string = css`
-	font-size: 18px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -35,54 +46,78 @@ export const descriptionStyles: string = css`
 	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
 	margin-bottom: 8px;
+
+	@media (min-width: 645px) {
+		font-size: 20px;
+	}
+`;
+
+export const completedStyles: string = css`
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	@media (min-width: 645px) {
+		font-size: 20px;
+	}
+`;
+
+export const textStyles: string = css`
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	margin-bottom: 8px;
+
+	@media (min-width: 645px) {
+		font-size: 20px;
+	}
 `;
 
 export const buttonStyles: string = css`
 	color: ${colors.whiteX};
 	cursor: pointer;
-	margin: 6px;
+	margin: 2px;
 	transition: all 0.3s ease;
 	text-align: center;
 	border: solid;
 	border-width: 1px;
 
 	&:hover {
-		background-color: ${colors.brightGreyX};
+		background-color: ${colors.greyX};
 		color: ${colors.darkBlackX};
-		border-radius: 16px;
-	}
-`;
-
-export const deleteButtonStyles: string = css`
-	color: ${colors.whiteX};
-	cursor: pointer;
-	margin: 6px;
-	transition: all 0.3s ease;
-	text-align: center;
-	border: solid;
-	border-width: 1px;
-
-	&:hover {
-		background-color: ${colors.brightRedX};
-		color: ${colors.brightGreyX};
 		border-radius: 16px;
 	}
 `;
 
 export const detailsContainerStyles: string = css`
 	display: flex;
-	width: 400px;
-	height: 300px;
+	width: 150px;
 	flex-direction: column;
+
+	@media (min-width: 645px) {
+		width: 240px;
+		height: 240px;
+	}
 `;
 
 export const buttonsContainerStyles: string = css`
 	display: flex;
-	width: 400px;
+	width: 120px;
 	flex-direction: column;
+
+	@media (min-width: 645px) {
+		width: 240px;
+		gap: 1rem;
+		height: 240px;
+	}
 `;
 
 export const completenessContainer: string = css`
 	display: flex;
+	align-items: center;
+	justify-content: start;
 	gap: 4px;
 `;
