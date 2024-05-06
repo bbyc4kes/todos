@@ -21,7 +21,10 @@ todosRouter
 		validateBody(todoSchema),
 		catchAsync(todoController.updateTodo),
 	)
-	.patch(doesExist('todo'), catchAsync(todoController.updateCompleteness))
+	.patch(
+		doesExist('todo'),
+		catchAsync(todoController.updateCompleteness),
+	)
 	.delete(doesExist('todo'), catchAsync(todoController.destroyTodo));
 
 todosRouter.patch(
