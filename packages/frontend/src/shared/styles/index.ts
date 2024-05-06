@@ -23,6 +23,7 @@ export const THEME = Object.freeze({
 		m: '24px',
 		l: '26px',
 		xl: '32px',
+		xxl: '72px',
 	},
 	fontSize: {
 		xxs: '12px',

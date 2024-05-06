@@ -1,4 +1,5 @@
 import { css } from '@emotion/css';
+import { THEME } from '~shared/styles';
 
 export const tableStyles = css`
 	width: 100%;
@@ -15,5 +16,5 @@ export const descriptionColumnStyles = css`
 export const actionsColumnStyles = css`
 	display: flex;
 	align-items: center;
-	gap: 1rem;
+	gap: ${THEME.sizes.xs};
 `;

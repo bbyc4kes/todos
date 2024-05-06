@@ -3,7 +3,7 @@ import { THEME } from '~shared/styles';
 
 export const headingStyles = css`
 	font-size: ${THEME.sizes.xl};
-	height: 72px;
+	height: ${THEME.sizes.xxl};
 	font-weight: 700;
 	width: 100%;
 	background-color: ${THEME.colors.darkBlackX};

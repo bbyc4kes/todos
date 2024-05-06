@@ -3,7 +3,7 @@ import { THEME } from '~shared/styles';
 
 export const sliderStyles = css`
 	text-align: center;
-	margin: 1rem;
+	margin: ${THEME.sizes.xs};
 	width: 100%;
 `;
 

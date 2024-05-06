@@ -31,7 +31,7 @@ export const headingContainerStyles = css`
 	flex-direction: row;
 	justify-content: start;
 	align-items: center;
-	gap: 4px;
+	gap: ${THEME.sizes.xxxs};
 	font-size: ${THEME.sizes.l};
 `;
 
@@ -39,7 +39,7 @@ export const contentContainerStyles = css`
 	display: flex;
 	flex-direction: column;
 	margin-top: 
-	gap: 1rem;
+	gap: ${THEME.sizes.xs};
 	justify-content: center;
 	align-items: start;
 `;
@@ -47,7 +47,7 @@ export const contentContainerStyles = css`
 export const buttonGroupContainerStyles = css`
 	display: flex;
 	flex-direction: row;
-	gap: 1rem;
+	gap: ${THEME.sizes.xs};
 	justify-content: center;
 	align-items: start;
 `;
@@ -55,7 +55,7 @@ export const buttonGroupContainerStyles = css`
 export const checkboxGroupContainerStyles = css`
 	display: flex;
 	flex-direction: column;
-	gap: 1rem;
+	gap: ${THEME.sizes.xs};
 	justify-content: center;
 	align-items: start;
 `;
