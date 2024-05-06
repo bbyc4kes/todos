@@ -39,16 +39,18 @@ const TodoDetailsPage = (): React.ReactNode => {
 	const parsedId = parseFloat(id);
 
 	useEffect(() => {
-		todoService.getAllTodos();
-		todoService.getTodoById(parsedId);
+		(async (): Promise<void> => {
+			await todoService.getAllTodos();
+			await todoService.getTodoById(parsedId);
 
-		setIsPublic(todo?.isPublic);
-		setIsCompleted(todo?.isCompleted);
-	}, [id, todo]);
+			setIsPublic(todo?.isPublic);
+			setIsCompleted(todo?.isCompleted);
+		})();
+	}, []);
 
 	const handleEditing = async (data): Promise<void> => {
-		const isPublic = data.isPublic === 'true';
-		const isCompleted = data.isCompleted === 'true';
+		const isPublic = data.isPublic === true;
+		const isCompleted = data.isCompleted === true;
 
 		const todoData = {
 			...data,

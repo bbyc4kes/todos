@@ -24,4 +24,7 @@ export const THEME = Object.freeze({
 		l: '26px',
 		xl: '32px',
 	},
+	fontSize: {
+		xxs: '12px',
+	},
 });
