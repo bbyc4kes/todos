@@ -18,5 +18,5 @@ export const mainContentContainerStyles = css`
 	align-items: center;
 	text-align: center;
 	width: 100%;
-	gap: 2rem;
+	gap: ${THEME.sizes.xl};
 `;
