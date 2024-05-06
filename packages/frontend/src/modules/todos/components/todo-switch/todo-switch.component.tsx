@@ -12,7 +12,7 @@ const TodoCheckbox = ({
 }): JSX.Element => {
 	const [todoCompleteness, setTodoCompleteness] = useState(isCompleted);
 
-	const toggleCompleteness = async (id: number): Promise<void> => {
+	const toggleCompleteness = async (): Promise<void> => {
 		setTodoCompleteness(!todoCompleteness);
 
 		await todoService.editCompleteness(id, {
@@ -21,7 +21,7 @@ const TodoCheckbox = ({
 	};
 	return (
 		<Checkbox
-			onClick={() => toggleCompleteness(id)}
+			onClick={toggleCompleteness}
 			large={false}
 			checked={todoCompleteness}
 			style={{ marginBottom: 0 }}

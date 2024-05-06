@@ -27,7 +27,7 @@ const TodoDetails = ({
 }: TTodoDetails): React.ReactNode => {
 	const navigate = useNavigate();
 
-	const handleGetTodoById = (id: number): void => {
+	const handleGetTodoById = (): void => {
 		navigate(`${ROUTER_KEYS.TODOS}/${id}`);
 	};
 
@@ -59,7 +59,7 @@ const TodoDetails = ({
 			<section className={buttonsContainerStyles}>
 				<CustomButton
 					extraButtonStyles={buttonStyles}
-					onClick={() => handleGetTodoById(id)}
+					onClick={handleGetTodoById}
 					text="View"
 					type="button"
 				/>
