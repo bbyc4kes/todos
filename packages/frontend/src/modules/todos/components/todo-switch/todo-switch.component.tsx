@@ -5,6 +5,7 @@ import todoService from '~modules/todos/services/http';
 const TodoCheckbox = ({
 	isCompleted,
 	id,
+	...props
 }: {
 	isCompleted: boolean;
 	id: number;
@@ -22,8 +23,10 @@ const TodoCheckbox = ({
 		<Checkbox
 			onClick={() => toggleCompleteness(id)}
 			large={false}
-			defaultChecked={todoCompleteness}
+			checked={todoCompleteness}
 			style={{ marginBottom: 0 }}
+			key={id}
+			{...props}
 		/>
 	);
 };

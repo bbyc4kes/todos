@@ -11,12 +11,12 @@ import { ROUTER_KEYS } from '~shared/keys';
 import DeleteButton from '../todo-delete-button/todo-delete-button.component';
 import { truncateText } from '~shared/utils/truncate-text';
 import TodoCheckbox from '../todo-switch/todo-switch.component';
-import TodoAddForm from '../todo-add-form/todo-add-form.component';
+import TodoAddSection from '../todo-add-section/todo-add-section.component';
 
 export default function TodoTable({ todos }): React.JSX.Element {
 	return (
 		<>
-			<TodoAddForm>
+			<TodoAddSection>
 				<HTMLTable className={tableStyles} bordered compact striped>
 					<thead>
 						<tr>
@@ -54,7 +54,7 @@ export default function TodoTable({ todos }): React.JSX.Element {
 						))}
 					</tbody>
 				</HTMLTable>
-			</TodoAddForm>
+			</TodoAddSection>
 		</>
 	);
 }

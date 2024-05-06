@@ -25,8 +25,8 @@ const extension: ExtensionFactory = (joi: typeof BaseJoi) => ({
 const Joi = BaseJoi.extend(extension);
 
 export const todoSchema = Joi.object({
-	title: Joi.string().required().escapeHTML().min(0),
-	description: Joi.string().required().escapeHTML().min(0),
+	title: Joi.string().required().escapeHTML().min(0).max(20),
+	description: Joi.string().required().escapeHTML().min(0).max(150),
 	isPublic: Joi.boolean(),
 	isCompleted: Joi.boolean(),
 });

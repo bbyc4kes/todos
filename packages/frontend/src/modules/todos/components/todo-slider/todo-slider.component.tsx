@@ -8,12 +8,12 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 
 import TodoDetails from '../todo-details/todo-details.component';
-import TodoAddForm from '../todo-add-form/todo-add-form.component';
+import TodoAddSection from '../todo-add-section/todo-add-section.component';
 
 export default function TodoSlider({ todos }): React.JSX.Element {
 	return (
 		<>
-			<TodoAddForm>
+			<TodoAddSection>
 				<Swiper
 					pagination={{
 						type: 'fraction',
@@ -29,7 +29,7 @@ export default function TodoSlider({ todos }): React.JSX.Element {
 						</SwiperSlide>
 					))}
 				</Swiper>
-			</TodoAddForm>
+			</TodoAddSection>
 		</>
 	);
 }
