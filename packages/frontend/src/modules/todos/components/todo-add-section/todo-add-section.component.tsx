@@ -6,9 +6,10 @@ import { useModal } from '~shared/hooks/use-modal/use-modal.hook';
 
 const TodoAddSection = ({ children }): JSX.Element => {
 	const { closeModal, isOpen, openModal } = useModal();
+
 	const onSubmit = async (data): Promise<void> => {
-		const isCompleted = data.isCompleted === true;
-		const isPublic = data.isPublic === true;
+		const isCompleted = data.isCompleted;
+		const isPublic = data.isPublic;
 
 		const todoData = {
 			...data,
@@ -19,6 +20,7 @@ const TodoAddSection = ({ children }): JSX.Element => {
 		await todoService.createTodo(todoData);
 		closeModal();
 	};
+
 	return (
 		<>
 			<TodoAdd openModal={openModal} />
