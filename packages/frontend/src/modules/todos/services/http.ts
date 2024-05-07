@@ -24,6 +24,7 @@ class TodoService extends HttpService {
 		);
 
 		useTodoStore.getState().getTodoById(data.id);
+		return data;
 	}
 
 	async createTodo(todo: Todo): Promise<void> {
@@ -32,6 +33,7 @@ class TodoService extends HttpService {
 			data: todo,
 		});
 
+		console.log(data);
 		useTodoStore.getState().addTodo(data);
 	}
 
