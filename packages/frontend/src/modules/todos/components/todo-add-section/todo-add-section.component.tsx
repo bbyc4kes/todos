@@ -8,8 +8,8 @@ const TodoAddSection = ({ children }): JSX.Element => {
 	const { closeModal, isOpen, openModal } = useModal();
 
 	const onSubmit = async (data): Promise<void> => {
-		const isCompleted = data.isCompleted;
-		const isPublic = data.isPublic;
+		const isCompleted = data.isCompleted === true;
+		const isPublic = data.isPublic === true;
 
 		const todoData = {
 			...data,

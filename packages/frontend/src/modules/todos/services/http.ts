@@ -1,4 +1,5 @@
 import { AxiosResponse } from 'axios';
+import { toaster } from '~shared/components/toast/toast.component';
 import HttpService from '~shared/services/http';
 import { useTodoStore } from '~store/todos/todo.store';
 import { Todo } from '~store/todos/todo.store.types';
@@ -33,7 +34,7 @@ class TodoService extends HttpService {
 			data: todo,
 		});
 
-		console.log(data);
+		toaster.show({ message: 'You have successfully created a todo.' });
 		useTodoStore.getState().addTodo(data);
 	}
 
@@ -46,6 +47,7 @@ class TodoService extends HttpService {
 			true,
 		);
 
+		toaster.show({ message: 'You have successfully edited a todo.' });
 		useTodoStore.getState().updateTodo(data);
 	}
 
@@ -84,9 +86,11 @@ class TodoService extends HttpService {
 			true,
 		);
 
+		toaster.show({ message: 'You have successfully deleted a todo.' });
 		useTodoStore.getState().destroyTodo(id);
 	}
 }
 
 const todoService = new TodoService();
+
 export default todoService;
