@@ -5,13 +5,14 @@ export interface Todo {
 	isCompleted: boolean;
 	isPublic: boolean;
 	userId: number | null;
-	updatedAt?: Date | null;
-	createdAt?: Date | null;
+	updatedAt: Date;
+	createdAt: Date;
 }
 
 export interface TodoStore {
 	todos: Todo[];
 	todoById: Todo;
+	isLoading: boolean;
 	setTodos: (todos: Todo[]) => void;
 	addTodo: (newTodo: Todo) => void;
 	destroyTodo: (id: number) => void;

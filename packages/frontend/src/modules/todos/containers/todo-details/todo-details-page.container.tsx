@@ -4,7 +4,6 @@ import { useModal } from '~shared/hooks/use-modal/use-modal.hook';
 
 import { Form } from 'react-final-form';
 import { Button, Checkbox, Dialog, Switch } from '@blueprintjs/core';
-import { useTodoStore } from '~store/todos/todo.store';
 import todoService from '../../services/http';
 import { ROUTER_KEYS } from '~shared/keys';
 import {
@@ -25,22 +24,26 @@ import {
 } from 'lucide-react';
 import { truncateText } from '~shared/utils/truncate-text';
 import AddTodoForm from '../../components/todo-form/todo-form.component';
+import { useCustomEffect } from '~modules/todos/hooks/use-custom-effect';
 
 const TodoDetailsPage = (): React.ReactNode => {
 	const { isOpen, openModal, closeModal } = useModal();
 	const { id } = useParams();
 
-	const todo = useTodoStore((state) => state.todoById);
 	const navigate = useNavigate();
 
-	const [isPublic, setIsPublic] = useState(todo?.isPublic);
-	const [isCompleted, setIsCompleted] = useState(todo?.isCompleted);
+	const [isPublic, setIsPublic] = useState(null);
+	const [isCompleted, setIsCompleted] = useState(null);
+	const [todo, setTodo] = useState(null);
 
 	const parsedId = parseFloat(id);
 
+	useCustomEffect(setIsPublic, setIsCompleted, setTodo, () =>
+		todoService.getTodoById(parsedId),
+	);
+
 	useEffect(() => {
 		(async (): Promise<void> => {
-			await todoService.getAllTodos();
 			await todoService.getTodoById(parsedId);
 
 			setIsPublic(todo?.isPublic);
@@ -49,8 +52,8 @@ const TodoDetailsPage = (): React.ReactNode => {
 	}, []);
 
 	const handleEditing = async (data): Promise<void> => {
-		const isPublic = data.isPublic === true;
-		const isCompleted = data.isCompleted === true;
+		const isPublic = data.isPublic;
+		const isCompleted = data.isCompleted;
 
 		const todoData = {
 			...data,
@@ -59,8 +62,7 @@ const TodoDetailsPage = (): React.ReactNode => {
 		};
 
 		await todoService.editTodo(parsedId, todoData);
-		await todoService.getTodoById(parsedId);
-
+		setTodo(todoData);
 		closeModal();
 	};
 
