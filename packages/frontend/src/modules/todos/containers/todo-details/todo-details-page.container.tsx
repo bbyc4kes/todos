@@ -25,6 +25,7 @@ import {
 import { truncateText } from '~shared/utils/truncate-text';
 import AddTodoForm from '../../components/todo-form/todo-form.component';
 import { useCustomEffect } from '~modules/todos/hooks/use-custom-effect';
+import { Todo } from '~store/todos/todo.store.types';
 
 const TodoDetailsPage = (): React.ReactNode => {
 	const { isOpen, openModal, closeModal } = useModal();
@@ -32,9 +33,9 @@ const TodoDetailsPage = (): React.ReactNode => {
 
 	const navigate = useNavigate();
 
-	const [isPublic, setIsPublic] = useState(null);
-	const [isCompleted, setIsCompleted] = useState(null);
-	const [todo, setTodo] = useState(null);
+	const [isPublic, setIsPublic] = useState<boolean>(null);
+	const [isCompleted, setIsCompleted] = useState<boolean>(null);
+	const [todo, setTodo] = useState<Todo>(null);
 
 	const parsedId = parseFloat(id);
 
