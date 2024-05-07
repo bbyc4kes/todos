@@ -7,8 +7,8 @@ export type TodoType = {
 	isCompleted: boolean;
 	isPublic: boolean;
 	userId?: number | null;
-	updatedAt?: Date | null;
-	createdAt?: Date | null;
+	updatedAt: Date;
+	createdAt: Date;
 };
 
 export type ExpressFunctionType = (
