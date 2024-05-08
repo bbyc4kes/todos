@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import todoService from '~modules/todos/services/http';
+import React from 'react';
 import { listStyles, todosContainerStyles } from './todo-list.styles';
 import { useTodoStore } from '~store/todos/todo.store';
 import TodoDetails from '../todo-details/todo-details.component';
@@ -8,9 +7,6 @@ import TodoAddSection from '../todo-add-section/todo-add-section.component';
 
 const TodoList = (): React.ReactNode => {
 	const todos = useTodoStore((state) => state.todos);
-	useEffect(() => {
-		todoService.getAllTodos();
-	}, []);
 
 	return (
 		<>

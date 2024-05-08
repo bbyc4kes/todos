@@ -23,7 +23,6 @@ const TodoDetails = ({
 	title,
 	description,
 	isPublic,
-	isCompleted,
 }: TTodoDetails): React.ReactNode => {
 	const navigate = useNavigate();
 
@@ -53,7 +52,7 @@ const TodoDetails = ({
 				</div>
 				<div className={completenessContainer}>
 					<h3 className={completedStyles}>COMPLETED:</h3>
-					<TodoCheckbox isCompleted={isCompleted} id={id} />
+					<TodoCheckbox id={id} />
 				</div>
 			</section>
 			<section className={buttonsContainerStyles}>

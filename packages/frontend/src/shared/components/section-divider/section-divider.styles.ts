@@ -1,7 +1,8 @@
 import { css } from '@emotion/css';
+import { THEME } from '~shared/styles';
 
 export const sectionDividerStyles = css`
-	background-color: #000;
+	background-color: ${THEME.colors.black};
 	margin-top: 6rem;
 	margin-bottom: 2rem;
 	height: 4rem;

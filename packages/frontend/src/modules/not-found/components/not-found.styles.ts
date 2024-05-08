@@ -24,7 +24,7 @@ export const buttonStyles = css`
 export const title = css`
 	font-size: ${THEME.sizes.m};
 	margin-bottom: ${THEME.sizes.s};
-	color: #333;
+	color: ${THEME.colors.deepRed};
 `;
 
 export const paragraghStyles = css`
@@ -38,5 +38,5 @@ export const buttonContainer = css`
 	justify-content: center;
 	align-items: center;
 	font-size: ${THEME.sizes.m};
-	color: #333;
+	color: ${THEME.colors.deepRed};
 `;

@@ -1,8 +1,8 @@
 import React from 'react';
-import todoService from '~modules/todos/services/http';
 import TodoAdd from '../todo-add/todo-add.component';
 import TodoDialog from '../todo-dialog/todo-dialog.component';
 import { useModal } from '~shared/hooks/use-modal/use-modal.hook';
+import { useTodoStore } from '~store/todos/todo.store';
 
 const TodoAddSection = ({ children }): JSX.Element => {
 	const { closeModal, isOpen, openModal } = useModal();
@@ -17,7 +17,7 @@ const TodoAddSection = ({ children }): JSX.Element => {
 			isPublic,
 		};
 
-		await todoService.createTodo(todoData);
+		await useTodoStore.getState().createTodo(todoData);
 		closeModal();
 	};
 

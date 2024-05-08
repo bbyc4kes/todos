@@ -4,7 +4,9 @@ export const THEME = Object.freeze({
 		darkBlackX: '#0B090A',
 		brightBlackX: '#161A1D',
 		philippineGray: '#8A8A8A',
+		chalk: '#f8f9fa',
 		white: '#fff',
+		deepRed: '#333',
 		darkRedX: '#660708',
 		lightDarkRedX: '#A4161A',
 		redX: '#BA181B',
@@ -13,6 +15,9 @@ export const THEME = Object.freeze({
 		greyX: '#D3D3D3',
 		brightGreyX: '#F5F3F4',
 		whiteX: '#FFFFFF',
+		darkRose: '#d50a84',
+		gradientX: '#f6fff8',
+		gradientY: '#fcfcfc',
 	},
 
 	sizes: {

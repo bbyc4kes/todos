@@ -23,6 +23,15 @@ export const paragraphContainerStyles = css`
 	font-size: ${THEME.sizes.s};
 	margin-top: ${THEME.sizes.xxxs};
 	margin-bottom: ${THEME.sizes.xxxs};
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+`;
+
+export const switchStyles = css`
+	margin-bottom: 0;
+	position: absolute;
+	right: 0;
 `;
 
 export const headingContainerStyles = css`

@@ -7,9 +7,12 @@ export const containerStyles = css`
 	flex-direction: column;
 	justify-content: center;
 	width: 100%;
-	background-color: #f8f9fa;
+	background-color: ${THEME.colors.chalk};
 	border-radius: ${THEME.sizes.xxxs};
-	background: linear-gradient(#f6fff8, #fcfcfc);
+	background: linear-gradient(
+		${THEME.colors.gradientX},
+		${THEME.colors.gradientY}
+	);
 `;
 export const mainContentContainerStyles = css`
 	display: flex;

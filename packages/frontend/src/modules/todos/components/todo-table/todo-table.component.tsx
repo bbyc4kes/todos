@@ -41,10 +41,7 @@ export default function TodoTable({ todos }): React.JSX.Element {
 										>
 											<Button>Edit</Button>
 										</Link>
-										<TodoCheckbox
-											isCompleted={todo.isCompleted}
-											id={todo.id}
-										/>
+										<TodoCheckbox id={todo.id} />
 										<DeleteButton
 											id={todo.id}
 										></DeleteButton>
