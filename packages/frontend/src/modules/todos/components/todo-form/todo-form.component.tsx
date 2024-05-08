@@ -5,13 +5,15 @@ import {
 	todoFormContainerStyles,
 	labelContainerStyles,
 	inputContainerStyles,
+	paragraghTitleStyles,
 } from './todo-form.styles';
-import validator from 'validator';
 import TodoFieledInput from '../todo-field-input/todo-field-input.component';
 import { Field } from 'react-final-form';
+import { validateField } from '~shared/utils/validate-field';
 
 const AddTodoForm = ({ handleSubmit, type, todo = null }): React.ReactNode => {
 	const submitBtnText = type === 'edit' ? 'Edit' : 'Create';
+
 	return (
 		<form onSubmit={handleSubmit} className={todoFormContainerStyles}>
 			<label>
@@ -23,12 +25,7 @@ const AddTodoForm = ({ handleSubmit, type, todo = null }): React.ReactNode => {
 					component="input"
 					type="text"
 					defaultValue={todo?.title}
-					validate={(value): string | boolean =>
-						!validator.isLength(value || '', {
-							min: 1,
-							max: 20,
-						}) && 'Title must be from 1 to 20 characters long.'
-					}
+					validate={validateField}
 					placeholder="Title"
 				/>
 			</div>
@@ -41,14 +38,11 @@ const AddTodoForm = ({ handleSubmit, type, todo = null }): React.ReactNode => {
 					component="input"
 					type="text"
 					defaultValue={todo?.description}
-					validate={(value) =>
-						!validator.isAlphanumeric(value || '') &&
-						'Please provide a valid description.'
-					}
+					validate={validateField}
 					placeholder="Description"
 				/>
 			</div>
-			<p style={{ margin: 0 }}>
+			<p className={paragraghTitleStyles}>
 				<b>IS IT PUBLIC?</b>
 			</p>
 			<div className={checkboxContainerStyles}>
@@ -60,7 +54,7 @@ const AddTodoForm = ({ handleSubmit, type, todo = null }): React.ReactNode => {
 						className={labelContainerStyles}
 						initialValue={todo?.isPublic}
 					/>
-					<p style={{ margin: 0 }}>Yes, make it Public</p>
+					<p className={paragraghTitleStyles}>Yes, make it Public</p>
 				</label>
 			</div>
 			<div>
@@ -76,7 +70,7 @@ const AddTodoForm = ({ handleSubmit, type, todo = null }): React.ReactNode => {
 							className={labelContainerStyles}
 							initialValue={todo?.isCompleted}
 						/>
-						<p style={{ margin: 0 }}>Yes</p>
+						<p className={paragraghTitleStyles}>Yes</p>
 					</label>
 				</div>
 			</div>

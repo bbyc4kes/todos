@@ -1,7 +1,7 @@
 import React from 'react';
 import CustomButton from '~shared/components/button/button.component';
 import { deleteButtonStyles } from './todo-delete-button.styles';
-import todoService from '~modules/todos/services/http';
+import { useTodoStore } from '~store/todos/todo.store';
 
 export default function DeleteButton({
 	id,
@@ -9,7 +9,7 @@ export default function DeleteButton({
 	id: number;
 }): React.JSX.Element {
 	const handleDeletion = (): void => {
-		todoService.destroyTodo(id);
+		useTodoStore.getState().destroyTodo(id);
 	};
 
 	return (

@@ -8,14 +8,15 @@ import {
 	mainContentContainerStyles,
 } from './todo-main-page.styles';
 import useBreakpoints from '~shared/hooks/use-breakpoints/use-breakpoints.hook';
-import todoService from '~modules/todos/services/http';
 
 const TodoMainPage = (): React.ReactNode => {
-	useEffect(() => {
-		todoService.getAllTodos();
-	}, []);
-	const todos = useTodoStore((state) => state.todos);
 	const { isDesktop, isMobile, isTablet } = useBreakpoints();
+
+	useEffect(() => {
+		useTodoStore.getState().setTodos(todos);
+	}, []);
+
+	const todos = useTodoStore((state) => state.todos);
 	return (
 		<div className={containerStyles}>
 			<div className={mainContentContainerStyles}>

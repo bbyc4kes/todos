@@ -1,21 +1,20 @@
 import { Checkbox } from '@blueprintjs/core';
-import React, { useState } from 'react';
-import todoService from '~modules/todos/services/http';
+import React, { useMemo, useState } from 'react';
+import { useTodoStore } from '~store/todos/todo.store';
+import { paragraghTitleStyles } from './todo-switch.styles';
+const TodoCheckbox = ({ id, ...props }: { id: number }): JSX.Element => {
+	const { todos } = useTodoStore();
 
-const TodoCheckbox = ({
-	isCompleted,
-	id,
-	...props
-}: {
-	isCompleted: boolean;
-	id: number;
-}): JSX.Element => {
-	const [todoCompleteness, setTodoCompleteness] = useState(isCompleted);
+	const todo = useMemo(() => {
+		return todos.find((todo) => todo.id === id);
+	}, [todos, id]);
+
+	const [todoCompleteness, setTodoCompleteness] = useState(todo.isCompleted);
 
 	const toggleCompleteness = async (): Promise<void> => {
 		setTodoCompleteness(!todoCompleteness);
 
-		await todoService.editCompleteness(id, {
+		await useTodoStore.getState().updateCompleteness(id, {
 			isCompleted: !todoCompleteness,
 		});
 	};
@@ -24,7 +23,7 @@ const TodoCheckbox = ({
 			onClick={toggleCompleteness}
 			large={false}
 			checked={todoCompleteness}
-			style={{ marginBottom: 0 }}
+			className={paragraghTitleStyles}
 			key={id}
 			{...props}
 		/>

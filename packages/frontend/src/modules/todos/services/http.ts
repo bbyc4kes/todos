@@ -1,22 +1,21 @@
 import { AxiosResponse } from 'axios';
 import { toaster } from '~shared/components/toast/toast.component';
 import HttpService from '~shared/services/http';
-import { useTodoStore } from '~store/todos/todo.store';
 import { Todo } from '~store/todos/todo.store.types';
 
 class TodoService extends HttpService {
 	constructor() {
 		super();
 	}
-	async getAllTodos(): Promise<void> {
+	async getAllTodos(): Promise<Todo[]> {
 		const { data }: AxiosResponse<Todo[]> = await this.get({
 			url: 'todos',
 		});
 
-		useTodoStore.getState().setTodos(data);
+		return data;
 	}
 
-	async getTodoById(id: number): Promise<void> {
+	async getTodoById(id: number): Promise<Todo> {
 		const { data } = await this.get(
 			{
 				url: `todos/${id}`,
@@ -24,21 +23,20 @@ class TodoService extends HttpService {
 			true,
 		);
 
-		useTodoStore.getState().getTodoById(data.id);
 		return data;
 	}
 
-	async createTodo(todo: Todo): Promise<void> {
+	async createTodo(todo: Todo): Promise<Todo> {
 		const { data }: AxiosResponse<Todo> = await this.post({
 			url: 'todos',
 			data: todo,
 		});
 
 		toaster.show({ message: 'You have successfully created a todo.' });
-		useTodoStore.getState().addTodo(data);
+		return data;
 	}
 
-	async editTodo(id: number, todo: Todo): Promise<void> {
+	async editTodo(id: number, todo: Todo): Promise<Todo> {
 		const { data }: AxiosResponse<Todo> = await this.put(
 			{
 				url: `todos/${id}`,
@@ -48,25 +46,28 @@ class TodoService extends HttpService {
 		);
 
 		toaster.show({ message: 'You have successfully edited a todo.' });
-		useTodoStore.getState().updateTodo(data);
+		return data;
 	}
 
-	async editPrivacy(id: number, todo: { isPublic: boolean }): Promise<void> {
+	async editPublicity(
+		id: number,
+		todo: { isPublic: boolean },
+	): Promise<Todo> {
 		const { data }: AxiosResponse<Todo> = await this.patch(
 			{
-				url: `todos/${id}`,
+				url: `todos/${id}/privacy`,
 				params: todo,
 			},
 			true,
 		);
 
-		useTodoStore.getState().updateTodo(data);
+		return data;
 	}
 
 	async editCompleteness(
 		id: number,
 		todo: { isCompleted: boolean },
-	): Promise<void> {
+	): Promise<Todo> {
 		const { data }: AxiosResponse<Todo> = await this.patch(
 			{
 				url: `todos/${id}`,
@@ -75,7 +76,7 @@ class TodoService extends HttpService {
 			true,
 		);
 
-		useTodoStore.getState().updateTodo(data);
+		return data;
 	}
 
 	async destroyTodo(id: number): Promise<void> {
@@ -87,7 +88,6 @@ class TodoService extends HttpService {
 		);
 
 		toaster.show({ message: 'You have successfully deleted a todo.' });
-		useTodoStore.getState().destroyTodo(id);
 	}
 }
 

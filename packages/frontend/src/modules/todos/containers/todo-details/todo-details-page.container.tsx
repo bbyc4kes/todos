@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useModal } from '~shared/hooks/use-modal/use-modal.hook';
 
@@ -13,6 +13,7 @@ import {
 	headingContainerStyles,
 	mainContainerStyles,
 	paragraphContainerStyles,
+	switchStyles,
 	titleContainerStyles,
 } from './todo-details.styles';
 import Layout from '~shared/layouts/layout';
@@ -22,10 +23,11 @@ import {
 	NotebookPenIcon,
 	Text,
 } from 'lucide-react';
-import { truncateText } from '~shared/utils/truncate-text';
 import AddTodoForm from '../../components/todo-form/todo-form.component';
-import { useCustomEffect } from '~modules/todos/hooks/use-custom-effect';
 import { Todo } from '~store/todos/todo.store.types';
+import { useTodoStore } from '~store/todos/todo.store';
+import { useFetchEffect } from '~modules/todos/hooks/use-fetch-effect';
+import { TodoCompleteness, TodoVisibility } from './todo-details.types';
 
 const TodoDetailsPage = (): React.ReactNode => {
 	const { isOpen, openModal, closeModal } = useModal();
@@ -33,60 +35,42 @@ const TodoDetailsPage = (): React.ReactNode => {
 
 	const navigate = useNavigate();
 
-	const [isPublic, setIsPublic] = useState<boolean>(null);
-	const [isCompleted, setIsCompleted] = useState<boolean>(null);
-	const [todo, setTodo] = useState<Todo>(null);
-
 	const parsedId = parseFloat(id);
 
-	useCustomEffect(setIsPublic, setIsCompleted, setTodo, () =>
-		todoService.getTodoById(parsedId),
+	const todo = useFetchEffect(() =>
+		useTodoStore.getState().getTodoById(parsedId),
 	);
 
-	useEffect(() => {
-		(async (): Promise<void> => {
-			await todoService.getTodoById(parsedId);
-
-			setIsPublic(todo?.isPublic);
-			setIsCompleted(todo?.isCompleted);
-		})();
-	}, []);
-
-	const handleEditing = async (data): Promise<void> => {
+	const handleEditing = async (data: Todo): Promise<void> => {
 		const isPublic = data.isPublic;
 		const isCompleted = data.isCompleted;
-
 		const todoData = {
 			...data,
 			isPublic,
 			isCompleted,
 		};
 
-		await todoService.editTodo(parsedId, todoData);
-		setTodo(todoData);
-		closeModal();
+		await useTodoStore.getState().updateTodo(parsedId, todoData);
+
+		await closeModal();
+		handleGoBack();
 	};
 
 	const toggleCompleteness = async (): Promise<void> => {
-		const toggledCompleteness = !isCompleted;
+		const toggledCompleteness = !todo.isCompleted;
 
 		await todoService.editCompleteness(parsedId, {
 			isCompleted: toggledCompleteness,
 		});
 		await todoService.getAllTodos();
-
-		setIsCompleted(toggledCompleteness);
 	};
 
-	const togglePrivacy = async (): Promise<void> => {
-		const toggledPrivacy = !isPublic;
+	const togglePublicity = async (): Promise<void> => {
+		const toggledPrivacy = !todo.isPublic;
 
-		await todoService.editPrivacy(parsedId, {
-			isPublic: toggledPrivacy,
-		});
-		await todoService.getAllTodos();
-
-		setIsPublic(toggledPrivacy);
+		await useTodoStore
+			.getState()
+			.updatePublicity(parsedId, { isPublic: toggledPrivacy });
 	};
 
 	const handleGoBack = (): void => {
@@ -104,9 +88,7 @@ const TodoDetailsPage = (): React.ReactNode => {
 								TODO TITLE: <br />
 							</h2>
 							<p className={paragraphContainerStyles}>
-								{todo
-									? truncateText(todo?.title, 20)
-									: todo?.title}
+								{todo.title ?? ''}
 							</p>
 						</div>
 						<div>
@@ -115,9 +97,7 @@ const TodoDetailsPage = (): React.ReactNode => {
 								DESCRIPTION: <br />
 							</h2>
 							<p className={paragraphContainerStyles}>
-								{todo
-									? truncateText(todo?.description, 20)
-									: todo?.description}
+								{todo.description ?? ''}
 							</p>
 						</div>
 					</section>
@@ -128,14 +108,12 @@ const TodoDetailsPage = (): React.ReactNode => {
 								PUBLICITY:
 							</h2>
 							<p className={paragraphContainerStyles}>
-								{todo?.isPublic ? 'Public' : 'Private'}
+								{todo?.isPublic
+									? TodoVisibility.PUBLIC
+									: TodoVisibility.PRIVATE}
 								<Switch
-									onClick={togglePrivacy}
-									style={{
-										marginBottom: '0',
-										position: 'absolute',
-										right: 0,
-									}}
+									onClick={togglePublicity}
+									className={switchStyles}
 									disabled
 									large={true}
 									checked={todo?.isPublic}
@@ -149,17 +127,13 @@ const TodoDetailsPage = (): React.ReactNode => {
 							</h2>
 							<p className={paragraphContainerStyles}>
 								{todo?.isCompleted
-									? 'Completed'
-									: 'Not Completed'}
+									? TodoCompleteness.COMPLETE
+									: TodoCompleteness.NOT_COMPLETE}
 								<Checkbox
 									onChange={toggleCompleteness}
 									large={true}
 									disabled
-									style={{
-										marginBottom: '0',
-										position: 'absolute',
-										right: 0,
-									}}
+									className={switchStyles}
 									checked={todo?.isCompleted}
 								/>
 							</p>

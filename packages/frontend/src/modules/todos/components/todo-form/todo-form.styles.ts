@@ -24,6 +24,10 @@ export const todoFormContainerStyles: string = css`
 	padding: 1rem;
 `;
 
+export const paragraghTitleStyles: string = css`
+	margin: 0;
+`;
+
 export const inputContainerStyles: string = css`
 	display: flex;
 	flex-direction: column;
