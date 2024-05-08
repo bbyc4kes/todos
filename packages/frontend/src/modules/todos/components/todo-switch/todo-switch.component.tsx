@@ -20,7 +20,7 @@ const TodoCheckbox = ({ id, ...props }: { id: number }): JSX.Element => {
 	};
 	return (
 		<Checkbox
-			onClick={toggleCompleteness}
+			onChange={toggleCompleteness}
 			large={false}
 			checked={todoCompleteness}
 			className={paragraghTitleStyles}

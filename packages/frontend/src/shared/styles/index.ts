@@ -21,6 +21,7 @@ export const THEME = Object.freeze({
 	},
 
 	sizes: {
+		xxxxs: '4px',
 		xxxs: '8px',
 		xxs: '18px',
 		xs: '16px',

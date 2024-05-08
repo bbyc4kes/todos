@@ -9,7 +9,6 @@ import {
 import { Link } from 'react-router-dom';
 import { ROUTER_KEYS } from '~shared/keys';
 import DeleteButton from '../todo-delete-button/todo-delete-button.component';
-import { truncateText } from '~shared/utils/truncate-text';
 import TodoCheckbox from '../todo-switch/todo-switch.component';
 import TodoAddSection from '../todo-add-section/todo-add-section.component';
 
@@ -32,7 +31,7 @@ export default function TodoTable({ todos }): React.JSX.Element {
 									{todo.title}
 								</td>
 								<td className={descriptionColumnStyles}>
-									{truncateText(todo?.description, 30)}
+									{todo?.description}
 								</td>
 								<td>
 									<div className={actionsColumnStyles}>
