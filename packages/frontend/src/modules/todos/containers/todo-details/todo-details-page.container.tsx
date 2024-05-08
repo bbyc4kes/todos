@@ -4,7 +4,6 @@ import { useModal } from '~shared/hooks/use-modal/use-modal.hook';
 
 import { Form } from 'react-final-form';
 import { Button, Checkbox, Dialog, Switch } from '@blueprintjs/core';
-import todoService from '../../services/http';
 import { ROUTER_KEYS } from '~shared/keys';
 import {
 	buttonGroupContainerStyles,
@@ -26,21 +25,17 @@ import {
 import AddTodoForm from '../../components/todo-form/todo-form.component';
 import { Todo } from '~store/todos/todo.store.types';
 import { useTodoStore } from '~store/todos/todo.store';
-import { useFetchEffect } from '~modules/todos/hooks/use-fetch-effect';
 import { TodoCompleteness, TodoVisibility } from './todo-details.types';
+import { fetchTodoById } from '~modules/todos/hooks/fetch-todo-by-id';
+import { useFetchEffect } from '~modules/todos/hooks/use-fetch-effect';
 
 const TodoDetailsPage = (): React.ReactNode => {
 	const { isOpen, openModal, closeModal } = useModal();
 	const { id } = useParams();
-
+	const parsedId = parseFloat(id);
 	const navigate = useNavigate();
 
-	const parsedId = parseFloat(id);
-
-	const todo = useFetchEffect(() =>
-		useTodoStore.getState().getTodoById(parsedId),
-	);
-
+	const todo = useFetchEffect(parsedId);
 	const handleEditing = async (data: Todo): Promise<void> => {
 		const isPublic = data.isPublic;
 		const isCompleted = data.isCompleted;
@@ -50,19 +45,19 @@ const TodoDetailsPage = (): React.ReactNode => {
 			isCompleted,
 		};
 
+		closeModal();
 		await useTodoStore.getState().updateTodo(parsedId, todoData);
-
-		await closeModal();
 		handleGoBack();
 	};
 
 	const toggleCompleteness = async (): Promise<void> => {
 		const toggledCompleteness = !todo.isCompleted;
 
-		await todoService.editCompleteness(parsedId, {
-			isCompleted: toggledCompleteness,
-		});
-		await todoService.getAllTodos();
+		await useTodoStore
+			.getState()
+			.updateCompleteness(parsedId, { isCompleted: toggledCompleteness });
+
+		await fetchTodoById(parsedId);
 	};
 
 	const togglePublicity = async (): Promise<void> => {
@@ -71,6 +66,8 @@ const TodoDetailsPage = (): React.ReactNode => {
 		await useTodoStore
 			.getState()
 			.updatePublicity(parsedId, { isPublic: toggledPrivacy });
+
+		await fetchTodoById(parsedId);
 	};
 
 	const handleGoBack = (): void => {

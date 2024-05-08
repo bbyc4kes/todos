@@ -38,6 +38,14 @@ export const titleStyles: string = css`
 	}
 `;
 
+export const checkboxStyles = css`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0;
+	margin-top: ${THEME.sizes.xxxxs};
+`;
+
 export const descriptionStyles: string = css`
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -53,7 +61,7 @@ export const descriptionStyles: string = css`
 `;
 
 export const completedStyles: string = css`
-	overflow: hidden;
+	oaverflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 

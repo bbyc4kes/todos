@@ -11,17 +11,19 @@ import {
 	completenessContainer,
 	textStyles,
 	completedStyles,
+	checkboxStyles,
 } from './todo-details.styles';
 import CustomButton from '~shared/components/button/button.component';
 import { ROUTER_KEYS } from '~shared/keys';
-import { truncateText } from '~shared/utils/truncate-text';
 import DeleteButton from '../todo-delete-button/todo-delete-button.component';
-import TodoCheckbox from '../todo-switch/todo-switch.component';
+import { TodoVisibility } from '~modules/todos/containers/todo-details/todo-details.types';
+import { Checkbox } from '@blueprintjs/core';
 
 const TodoDetails = ({
 	id,
 	title,
 	description,
+	isCompleted,
 	isPublic,
 }: TTodoDetails): React.ReactNode => {
 	const navigate = useNavigate();
@@ -35,24 +37,29 @@ const TodoDetails = ({
 			<section className={detailsContainerStyles}>
 				<div>
 					<h3 className={titleStyles}>TITLE:</h3>
-					<p className={textStyles}>{truncateText(title, 10)}</p>
+					<p className={textStyles}>{title}</p>
 				</div>
 				<div>
 					<h3 className={descriptionStyles}>DESCRIPTION:</h3>
 
-					<p className={textStyles}>
-						{truncateText(description, 10)}
-					</p>
+					<p className={textStyles}>{description}</p>
 				</div>
 				<div>
 					<h3 className={descriptionStyles}>PUBLICITY:</h3>
 					<p className={textStyles}>
-						{isPublic ? 'public' : 'private'}
+						{isPublic
+							? TodoVisibility.PUBLIC
+							: TodoVisibility.PRIVATE}
 					</p>
 				</div>
 				<div className={completenessContainer}>
 					<h3 className={completedStyles}>COMPLETED:</h3>
-					<TodoCheckbox id={id} />
+					<Checkbox
+						large={false}
+						className={checkboxStyles}
+						disabled
+						checked={isCompleted}
+					/>
 				</div>
 			</section>
 			<section className={buttonsContainerStyles}>
