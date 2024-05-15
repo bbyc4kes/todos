@@ -1,14 +1,14 @@
-import { TodoType } from '@/types/todos.type';
+import { TTodo } from '@/types/todos.type';
 import { Prisma, PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-const findAll = async (): Promise<TodoType[]> => {
+const findAll = async (): Promise<TTodo[]> => {
 	const allTodos = await prisma.todo.findMany();
 	return allTodos;
 };
 
-const findById = async (id: number): Promise<TodoType | null> => {
+const findById = async (id: number): Promise<TTodo | null> => {
 	const todoById = await prisma.todo.findUnique({
 		where: {
 			id,
@@ -17,16 +17,14 @@ const findById = async (id: number): Promise<TodoType | null> => {
 	return todoById;
 };
 
-export const create = async (
-	data: Prisma.TodoCreateInput,
-): Promise<TodoType> => {
+export const create = async (data: Prisma.TodoCreateInput): Promise<TTodo> => {
 	const newTodo = await prisma.todo.create({
 		data,
 	});
 	return newTodo;
 };
 
-const update = async (id: number, data: TodoType): Promise<TodoType | null> => {
+const update = async (id: number, data: TTodo): Promise<TTodo | null> => {
 	const updatedTodo = await prisma.todo.update({
 		where: {
 			id,
@@ -36,7 +34,7 @@ const update = async (id: number, data: TodoType): Promise<TodoType | null> => {
 	return updatedTodo;
 };
 
-const destroy = async (id: number): Promise<TodoType | null> => {
+const destroy = async (id: number): Promise<TTodo | null> => {
 	const removedTodo = prisma.todo.delete({
 		where: {
 			id,
@@ -48,8 +46,8 @@ const destroy = async (id: number): Promise<TodoType | null> => {
 const updateIsComplete = async (
 	id: number,
 	isCompleted: boolean,
-): Promise<TodoType | null> => {
-	const updatedTodoIsComplete: TodoType | null = await prisma.todo.update({
+): Promise<TTodo | null> => {
+	const updatedTodoIsComplete: TTodo | null = await prisma.todo.update({
 		where: {
 			id,
 		},
@@ -63,8 +61,8 @@ const updateIsComplete = async (
 const updateIsPublic = async (
 	id: number,
 	isPublic: boolean,
-): Promise<TodoType | null> => {
-	const updatedTodoIsPublic: TodoType | null = await prisma.todo.update({
+): Promise<TTodo | null> => {
+	const updatedTodoIsPublic: TTodo | null = await prisma.todo.update({
 		where: {
 			id,
 		},

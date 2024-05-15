@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 
-export type ExpressUserFunctionType = (
+export type TExpressUserFunction = (
 	req: Request,
 	res: Response,
 ) => Promise<Response | undefined>;
+
+export type TExpressUserLogoutFunction = (req: Request, res: Response) => void;
