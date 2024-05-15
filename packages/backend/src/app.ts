@@ -2,7 +2,7 @@ import express, { Express, Request, Response } from 'express';
 import 'dotenv/config';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-
+import passport from 'passport';
 import AppRouter from './routes';
 
 const port = 3030;
@@ -21,6 +21,7 @@ app.use(express.json());
 app.use(bodyParser.json());
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(passport.initialize());
 
 router.init();
 
