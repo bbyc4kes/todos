@@ -26,5 +26,4 @@ passport.use(
 	),
 );
 
-// Authentication Middleware
 export const authenticate = passport.authenticate('jwt', { session: false });

@@ -70,10 +70,20 @@ export class UserController {
 		}
 	};
 
-	logoutUser: TExpressUserLogoutFunction = (req, res) => {
+	logoutUser: TExpressUserLogoutFunction = (req, res, next) => {
 		try {
+			if (!req.user) {
+				return res
+					.status(401)
+					.json({ message: 'User is not logged in' });
+			}
+
 			localStorage.removeItem('token');
-			res.status(200).json({ message: 'Logout successful' });
+			req.logout(function (err: Error) {
+				if (err) {
+					return next(err);
+				}
+			});
 		} catch (error) {
 			console.error('Error logging out user:', error);
 			res.status(500).json({ message: 'Internal server error' });
