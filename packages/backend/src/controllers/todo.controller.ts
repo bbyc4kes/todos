@@ -1,13 +1,13 @@
-import { ExpressFunctionType } from '@/types/todos.type';
+import { TExpressFunction } from '@/types/todos.type';
 import todoService from '@/services/todo.service';
 
 class TodoController {
-	getAllTodos: ExpressFunctionType = async (req, res) => {
+	getAllTodos: TExpressFunction = async (req, res) => {
 		const todos = await todoService.findAll();
 		return res.json(todos);
 	};
 
-	getTodoById: ExpressFunctionType = async (req, res) => {
+	getTodoById: TExpressFunction = async (req, res) => {
 		const { id } = req.params;
 
 		const parsedId = parseFloat(id);
@@ -16,13 +16,13 @@ class TodoController {
 		return res.json(todo);
 	};
 
-	addNewTodo: ExpressFunctionType = async (req, res) => {
+	addNewTodo: TExpressFunction = async (req, res) => {
 		const todoData = req.body;
 		const newTodo = await todoService.create(todoData);
 		return res.json(newTodo);
 	};
 
-	updateTodo: ExpressFunctionType = async (req, res) => {
+	updateTodo: TExpressFunction = async (req, res) => {
 		const { id } = req.params;
 
 		const parsedId = parseFloat(id);
@@ -31,7 +31,7 @@ class TodoController {
 		return res.json(updatedTodo);
 	};
 
-	destroyTodo: ExpressFunctionType = async (req, res) => {
+	destroyTodo: TExpressFunction = async (req, res) => {
 		const { id } = req.params;
 
 		const parsedId = parseFloat(id);
@@ -40,7 +40,7 @@ class TodoController {
 		return res.json(deletedTodo);
 	};
 
-	updateCompleteness: ExpressFunctionType = async (req, res) => {
+	updateCompleteness: TExpressFunction = async (req, res) => {
 		const { id } = req.params;
 		const { isCompleted } = req.query;
 
@@ -61,7 +61,7 @@ class TodoController {
 		return res.json(updatedTodo);
 	};
 
-	updatePrivacy: ExpressFunctionType = async (req, res) => {
+	updatePrivacy: TExpressFunction = async (req, res) => {
 		const { id } = req.params;
 		const { isPublic } = req.query;
 

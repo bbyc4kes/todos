@@ -2,14 +2,17 @@ import { PrismaClient } from '@prisma/client';
 import UserService from '@/services/user.service';
 import bcrypt from 'bcryptjs';
 import jwt, { Secret } from 'jsonwebtoken';
-import { ExpressUserFunctionType } from '@/types/user.types';
+import {
+	TExpressUserFunction,
+	TExpressUserLogoutFunction,
+} from '@/types/user.types';
 
 const prisma = new PrismaClient();
 
 export class UserController {
 	constructor(private userService: UserService) {}
 
-	logInUser: ExpressUserFunctionType = async (req, res) => {
+	logInUser: TExpressUserFunction = async (req, res) => {
 		const { email, password } = req.body;
 
 		const user = await prisma.user.findUnique({ where: { email } });
@@ -33,7 +36,7 @@ export class UserController {
 		res.json({ token });
 	};
 
-	registerUser: ExpressUserFunctionType = async (req, res) => {
+	registerUser: TExpressUserFunction = async (req, res) => {
 		try {
 			const { email, password, name } = req.body;
 
@@ -66,23 +69,17 @@ export class UserController {
 			res.status(500).json({ message: 'Internal server error' });
 		}
 	};
+
+	logoutUser: TExpressUserLogoutFunction = (req, res) => {
+		try {
+			localStorage.removeItem('token');
+			res.status(200).json({ message: 'Logout successful' });
+		} catch (error) {
+			console.error('Error logging out user:', error);
+			res.status(500).json({ message: 'Internal server error' });
+		}
+	};
 }
 
 const userController = new UserController(new UserService());
 export default userController;
-// try {
-// 	const newUser = await prisma.user.create({
-// 		data: {
-// 			email: 'test@example.com',
-// 			name: 'max',
-// 			password: '123',
-// 		},
-// 	});
-// 	res.json({
-// 		message: 'Your user was successfully created!',
-// 		success: true,
-// 		newUser,
-// 	});
-// } catch (error) {
-// 	res.json(error);
-// }

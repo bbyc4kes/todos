@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-export type TodoType = {
+export type TTodo = {
 	id: number;
 	title: string;
 	description: string;
@@ -11,7 +11,7 @@ export type TodoType = {
 	createdAt: Date;
 };
 
-export type ExpressFunctionType = (
+export type TExpressFunction = (
 	req: Request,
 	res: Response,
 ) => Promise<Response>;
