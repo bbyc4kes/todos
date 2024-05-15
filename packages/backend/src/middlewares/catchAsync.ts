@@ -4,7 +4,7 @@ type catchAsyncType = (
 	req: Request,
 	res: Response,
 	next: NextFunction,
-) => Promise<Response>;
+) => Promise<Response | undefined>;
 
 type ExpressMiddlewareType = (
 	req: Request,
