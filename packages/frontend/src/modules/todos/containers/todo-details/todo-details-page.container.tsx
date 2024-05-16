@@ -15,7 +15,6 @@ import {
 	switchStyles,
 	titleContainerStyles,
 } from './todo-details.styles';
-import Layout from '~shared/layouts/layout';
 import {
 	CircleCheckBigIcon,
 	KeyRoundIcon,
@@ -75,100 +74,94 @@ const TodoDetailsPage = (): React.ReactNode => {
 	};
 
 	return (
-		<Layout>
-			<div className={mainContainerStyles}>
-				<div className={contentContainerStyles}>
-					<section className={titleContainerStyles}>
-						<div>
-							<h2 className={headingContainerStyles}>
-								<NotebookPenIcon />
-								TODO TITLE: <br />
-							</h2>
-							<p className={paragraphContainerStyles}>
-								{todo.title ?? ''}
-							</p>
-						</div>
-						<div>
-							<h2 className={headingContainerStyles}>
-								<Text />
-								DESCRIPTION: <br />
-							</h2>
-							<p className={paragraphContainerStyles}>
-								{todo.description ?? ''}
-							</p>
-						</div>
-					</section>
-					<section className={checkboxGroupContainerStyles}>
-						<div>
-							<h2 className={headingContainerStyles}>
-								<KeyRoundIcon />
-								PUBLICITY:
-							</h2>
-							<p className={paragraphContainerStyles}>
-								{todo?.isPublic
-									? TodoVisibility.PUBLIC
-									: TodoVisibility.PRIVATE}
-								<Switch
-									onClick={togglePublicity}
-									className={switchStyles}
-									disabled
-									large={true}
-									checked={todo?.isPublic}
-								/>
-							</p>
-						</div>
-						<div>
-							<h2 className={headingContainerStyles}>
-								<CircleCheckBigIcon />
-								COMPLETENESS:
-							</h2>
-							<p className={paragraphContainerStyles}>
-								{todo?.isCompleted
-									? TodoCompleteness.COMPLETE
-									: TodoCompleteness.NOT_COMPLETE}
-								<Checkbox
-									onChange={toggleCompleteness}
-									large={true}
-									disabled
-									className={switchStyles}
-									checked={todo?.isCompleted}
-								/>
-							</p>
-						</div>
-					</section>
-					<section className={buttonGroupContainerStyles}>
-						<Button
-							text="BACK"
-							onClick={handleGoBack}
-							icon="arrow-left"
-						/>
-						<Button
-							onClick={openModal}
-							text="EDIT"
-							type="button"
-							icon="edit"
-						/>
-					</section>
-					<Dialog
-						isOpen={isOpen}
-						onClose={closeModal}
-						isCloseButtonShown={true}
-						title="EDIT TODO"
-					>
-						<Form
-							onSubmit={handleEditing}
-							render={(props) => (
-								<AddTodoForm
-									{...props}
-									type="edit"
-									todo={todo}
-								/>
-							)}
-						/>
-					</Dialog>
-				</div>
+		<div className={mainContainerStyles}>
+			<div className={contentContainerStyles}>
+				<section className={titleContainerStyles}>
+					<div>
+						<h2 className={headingContainerStyles}>
+							<NotebookPenIcon />
+							TODO TITLE: <br />
+						</h2>
+						<p className={paragraphContainerStyles}>
+							{todo.title ?? ''}
+						</p>
+					</div>
+					<div>
+						<h2 className={headingContainerStyles}>
+							<Text />
+							DESCRIPTION: <br />
+						</h2>
+						<p className={paragraphContainerStyles}>
+							{todo.description ?? ''}
+						</p>
+					</div>
+				</section>
+				<section className={checkboxGroupContainerStyles}>
+					<div>
+						<h2 className={headingContainerStyles}>
+							<KeyRoundIcon />
+							PUBLICITY:
+						</h2>
+						<p className={paragraphContainerStyles}>
+							{todo?.isPublic
+								? TodoVisibility.PUBLIC
+								: TodoVisibility.PRIVATE}
+							<Switch
+								onClick={togglePublicity}
+								className={switchStyles}
+								disabled
+								large={true}
+								checked={todo?.isPublic}
+							/>
+						</p>
+					</div>
+					<div>
+						<h2 className={headingContainerStyles}>
+							<CircleCheckBigIcon />
+							COMPLETENESS:
+						</h2>
+						<p className={paragraphContainerStyles}>
+							{todo?.isCompleted
+								? TodoCompleteness.COMPLETE
+								: TodoCompleteness.NOT_COMPLETE}
+							<Checkbox
+								onChange={toggleCompleteness}
+								large={true}
+								disabled
+								className={switchStyles}
+								checked={todo?.isCompleted}
+							/>
+						</p>
+					</div>
+				</section>
+				<section className={buttonGroupContainerStyles}>
+					<Button
+						text="BACK"
+						onClick={handleGoBack}
+						icon="arrow-left"
+					/>
+					<Button
+						onClick={openModal}
+						text="EDIT"
+						type="button"
+						icon="edit"
+					/>
+				</section>
+				<Dialog
+					isOpen={isOpen}
+					onClose={closeModal}
+					isCloseButtonShown={true}
+					title="EDIT TODO"
+				>
+					<Form
+						onSubmit={handleEditing}
+						render={(props) => (
+							<AddTodoForm {...props} type="edit" todo={todo} />
+						)}
+					/>
+				</Dialog>
 			</div>
-		</Layout>
+		</div>
 	);
 };
 
