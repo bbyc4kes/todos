@@ -10,3 +10,10 @@ export type TExpressUserLogoutFunction = (
 	res: Response,
 	next: NextFunction,
 ) => void;
+
+export type TUser = {
+	id: number;
+	name: string;
+	email: string;
+	password: string;
+};

@@ -1,4 +1,4 @@
-import { TExpressFunction } from '@/types/todos.type';
+import { TExpressFunction } from '@/types/todos.types';
 import todoService from '@/services/todo.service';
 
 class TodoController {
