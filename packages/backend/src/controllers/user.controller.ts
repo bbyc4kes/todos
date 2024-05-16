@@ -1,17 +1,29 @@
 import { PrismaClient } from '@prisma/client';
-import UserService from '@/services/user.service';
 import bcrypt from 'bcryptjs';
 import jwt, { Secret } from 'jsonwebtoken';
 import {
 	TExpressUserFunction,
 	TExpressUserLogoutFunction,
 } from '@/types/user.types';
+import { TExpressFunction } from '@/types/todos.types';
+import userService from '@/services/user.service';
 
 const prisma = new PrismaClient();
 
-export class UserController {
-	constructor(private userService: UserService) {}
+class UserController {
+	getAllUsers: TExpressFunction = async (req, res) => {
+		const users = await userService.findAllUsers();
+		return res.json(users);
+	};
 
+	getUserById: TExpressFunction = async (req, res) => {
+		const { id } = req.params;
+
+		const parsedId = parseFloat(id);
+		const user = await userService.findUserById(parsedId);
+
+		return res.json(user);
+	};
 	logInUser: TExpressUserFunction = async (req, res) => {
 		const { email, password } = req.body;
 
@@ -40,23 +52,28 @@ export class UserController {
 		try {
 			const { email, password, name } = req.body;
 
+			console.log(
+				'inside the backend registerUser: ',
+				email,
+				password,
+				name,
+			);
 			const existingUser = await prisma.user.findUnique({
 				where: { email },
 			});
+			console.log('existingUser: ', existingUser);
 			if (existingUser) {
 				return res.status(400).json({ message: 'User already exists' });
 			}
 
 			const hashedPassword = await bcrypt.hash(password, 10);
 
-			const newUser = await prisma.user.create({
-				data: {
-					email,
-					password: hashedPassword,
-					name,
-				},
+			const newUser = await userService.createUser({
+				email,
+				password: hashedPassword,
+				name,
 			});
-
+			console.log('newUser: ', newUser, 'user id??', newUser.id);
 			const token = jwt.sign(
 				{ id: newUser.id },
 				process.env.JWT_SECRET as Secret,
@@ -68,6 +85,15 @@ export class UserController {
 			console.error('Error registering user:', error);
 			res.status(500).json({ message: 'Internal server error' });
 		}
+	};
+
+	destroyTodo: TExpressFunction = async (req, res) => {
+		const { id } = req.params;
+
+		const parsedId = parseFloat(id);
+		const deletedTodo = await userService.destroyUser(parsedId);
+
+		return res.json(deletedTodo);
 	};
 
 	logoutUser: TExpressUserLogoutFunction = (req, res, next) => {
@@ -91,5 +117,4 @@ export class UserController {
 	};
 }
 
-const userController = new UserController(new UserService());
-export default userController;
+export default new UserController();
