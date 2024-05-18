@@ -1,18 +1,17 @@
 import { useEffect, useState } from 'react';
 import { Todo } from '~store/todos/todo.store.types';
-import { fetchTodoById } from './fetch-todo-by-id';
+import fetchTodo from './fetch-todo';
 
 export const useFetchEffect = (id: number): Todo => {
 	const [todo, setTodo] = useState<Todo | null>(null);
 
-	const fetchTodo = async (): Promise<void> => {
-		const todoById = await fetchTodoById(id);
-		setTodo(todoById);
-	};
-
 	useEffect(() => {
-		fetchTodo();
-	}, []);
+		fetchTodo(id, setTodo);
+
+		return () => {
+			setTodo(null);
+		};
+	}, [id]);
 
 	return { ...todo };
 };
