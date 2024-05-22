@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { TTodoDetails } from './todo-details.types';
+import { ITodoDetails } from './todo-details.types';
 import {
 	buttonStyles,
 	descriptionStyles,
@@ -25,7 +25,7 @@ const TodoDetails = ({
 	description,
 	isCompleted,
 	isPublic,
-}: TTodoDetails): React.ReactNode => {
+}: ITodoDetails): React.ReactNode => {
 	const navigate = useNavigate();
 
 	const handleGetTodoById = (): void => {
