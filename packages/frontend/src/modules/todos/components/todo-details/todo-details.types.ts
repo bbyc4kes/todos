@@ -1,4 +1,4 @@
-export interface TTodoDetails {
+export interface ITodoDetails {
 	id: number;
 	title: string;
 	description: string;
