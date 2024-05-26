@@ -24,6 +24,7 @@ class UserController {
 
 		return res.json(user);
 	};
+
 	logInUser: TExpressUserFunction = async (req, res) => {
 		const { email, password } = req.body;
 
