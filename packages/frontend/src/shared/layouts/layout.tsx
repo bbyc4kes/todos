@@ -1,14 +1,26 @@
 import React from 'react';
+import styles from './layout.styles';
 import { Link } from 'react-router-dom';
-import { headingStyles } from '~modules/todos/components/todo-list/todo-list.styles';
-import { linkStyles } from './layout.styles';
 
 const Layout = ({ children }: { children: React.ReactNode }): JSX.Element => {
 	return (
 		<>
-			<Link to="/" className={linkStyles}>
-				<h2 className={headingStyles}>TODOLIST</h2>
-			</Link>
+			<div className={styles.headerContainerStyles}>
+				<Link to="/" className={styles.linkNavigationStyles}>
+					<h3>TODOLIST</h3>
+				</Link>
+				<div className={styles.exportLinkContainerStyles}>
+					<Link
+						to="/register"
+						className={styles.linkNavigationStyles}
+					>
+						Sign In
+					</Link>
+					<Link to="/login" className={styles.linkNavigationStyles}>
+						Login
+					</Link>
+				</div>
+			</div>
 			{children}
 		</>
 	);

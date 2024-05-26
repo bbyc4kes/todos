@@ -1,6 +1,7 @@
 export const enum ROUTER_KEYS {
 	ROOT = '/',
 	LOGIN = '/login',
+	REGISTER = '/register',
 	NOT_FOUND = '*',
 	TODOS = '/todos',
 }
