@@ -2,6 +2,7 @@ import { Checkbox } from '@blueprintjs/core';
 import React, { useMemo, useState } from 'react';
 import { useTodoStore } from '~store/todos/todo.store';
 import { paragraghTitleStyles } from './todo-switch.styles';
+
 const TodoCheckbox = ({ id, ...props }: { id: number }): JSX.Element => {
 	const { todos } = useTodoStore();
 
