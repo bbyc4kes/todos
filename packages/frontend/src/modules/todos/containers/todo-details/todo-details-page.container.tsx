@@ -36,16 +36,8 @@ const TodoDetailsPage = (): React.ReactNode => {
 
 	const todo = useFetchEffect(parsedId);
 	const handleEditing = async (data: Todo): Promise<void> => {
-		const isPublic = data.isPublic;
-		const isCompleted = data.isCompleted;
-		const todoData = {
-			...data,
-			isPublic,
-			isCompleted,
-		};
-
 		closeModal();
-		await useTodoStore.getState().updateTodo(parsedId, todoData);
+		await useTodoStore.getState().updateTodo(parsedId, data);
 		handleGoBack();
 	};
 
